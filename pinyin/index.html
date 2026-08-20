@@ -1,154 +1,627 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>咕咕拼音 — 真隐私拼音输入法</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
-            background: #f5f5f7; color: #1d1d1f; line-height: 1.6;
-        }
-        .hero {
-            text-align: center; padding: 80px 20px 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-        }
-        .hero .icon { width: 96px; height: 96px; border-radius: 24px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,.2); }
-        .hero h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 700; letter-spacing: 1px; }
-        .hero p { font-size: 18px; opacity: .9; margin-top: 12px; max-width: 480px; margin-inline: auto; }
-        .hero .badges { margin-top: 24px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .hero .badge { background: rgba(255,255,255,.15); backdrop-filter: blur(10px); padding: 6px 16px; border-radius: 20px; font-size: 13px; }
-        .download-btn {
-            display: inline-block; margin-top: 32px; padding: 14px 40px;
-            background: #fff; color: #764ba2; border-radius: 28px;
-            font-size: 16px; font-weight: 600; text-decoration: none;
-            box-shadow: 0 4px 16px rgba(0,0,0,.15); transition: transform .2s, box-shadow .2s;
-        }
-        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>咕咕拼音 — 真隐私 · 自研引擎 · 智能引导 拼音输入法</title>
+<meta name="description" content="咕咕拼音：零权限、不联网、不追踪的真隐私拼音输入法。自研本地引擎毫秒级响应，智能缩放与误触纠错帮你定位下一键，19 款皮肤随心换装。">
+<style>
+:root{
+  --bg-dark:#070b18;
+  --bg-dark2:#0d1430;
+  --ink:#12141c;
+  --ink2:#565a6e;
+  --card:#ffffff;
+  --line:rgba(20,30,70,.08);
+  --brand:#4f6ef7;
+  --brand2:#8b5cf6;
+  --brand3:#ec4899;
+  --grad:linear-gradient(120deg,#4f6ef7,#8b5cf6 55%,#ec4899);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--ink);line-height:1.7;background:#f6f7fb;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
-        section { max-width: 860px; margin: 0 auto; padding: 60px 24px; }
-        section h2 { font-size: 26px; text-align: center; margin-bottom: 40px; color: #1d1d1f; }
+/* ── 顶部导航 ── */
+nav{
+  position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  background:rgba(10,14,32,.72);border-bottom:1px solid rgba(255,255,255,.08);
+}
+nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
+nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:#fff;letter-spacing:.5px}
+nav .brand img{width:32px;height:32px;border-radius:9px}
+nav .links{display:flex;gap:22px;margin-left:auto;font-size:14px;color:rgba(255,255,255,.75)}
+nav .links a:hover{color:#fff}
+nav .cta{
+  margin-left:8px;padding:8px 20px;border-radius:20px;color:#fff;font-size:13px;font-weight:600;
+  background:linear-gradient(120deg,#4f6ef7,#8b5cf6);box-shadow:0 4px 18px rgba(79,110,247,.4);
+}
+@media(max-width:820px){nav .links{display:none}}
 
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-        .feature-card {
-            background: #fff; border-radius: 16px; padding: 28px 24px;
-            box-shadow: 0 2px 12px rgba(0,0,0,.06); transition: transform .2s;
-        }
-        .feature-card:hover { transform: translateY(-4px); }
-        .feature-card .icon { font-size: 32px; margin-bottom: 12px; }
-        .feature-card h3 { font-size: 17px; margin-bottom: 8px; }
-        .feature-card p { font-size: 14px; color: #666; }
+/* ── Hero ── */
+.hero{
+  position:relative;color:#fff;overflow:hidden;
+  background:
+    radial-gradient(900px 520px at 85% -10%,rgba(139,92,246,.35),transparent 60%),
+    radial-gradient(700px 420px at -10% 20%,rgba(79,110,247,.35),transparent 60%),
+    linear-gradient(160deg,#070b18 0%,#0d1430 55%,#150f30 100%);
+}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:radial-gradient(600px 300px at 20% 90%,rgba(236,72,153,.18),transparent 60%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-top:88px;padding-bottom:96px}
+.hero .icon{width:88px;height:88px;border-radius:24px;box-shadow:0 12px 40px rgba(79,110,247,.45);margin-bottom:22px}
+.hero h1{font-size:clamp(38px,5.4vw,62px);line-height:1.12;font-weight:800;letter-spacing:1px}
+.hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .tag{margin-top:18px;font-size:clamp(15px,1.6vw,19px);color:rgba(255,255,255,.85);max-width:520px}
+.hero .points{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.hero .point{
+  padding:7px 16px;border-radius:999px;font-size:13px;color:#fff;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);
+}
+.hero .actions{margin-top:34px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.btn-download{
+  display:inline-flex;align-items:center;gap:12px;padding:15px 30px;border-radius:18px;
+  background:var(--grad);color:#fff;font-weight:700;font-size:16px;
+  box-shadow:0 12px 34px rgba(139,92,246,.45);transition:transform .2s,box-shadow .2s;
+}
+.btn-download:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(139,92,246,.55)}
+.btn-download svg{width:26px;height:26px}
+.hero .sub{font-size:13px;color:rgba(255,255,255,.55);margin-top:14px}
+.hero .sub b{color:rgba(255,255,255,.85)}
 
-        .privacy {
-            background: linear-gradient(135deg, #1a1a2e, #16213e); color: #fff;
-            text-align: center; border-radius: 20px; padding: 48px 24px;
-        }
-        .privacy h2 { color: #fff; }
-        .privacy .items { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-        .privacy .item { text-align: center; }
-        .privacy .item .emoji { font-size: 40px; margin-bottom: 8px; }
-        .privacy .item p { font-size: 14px; opacity: .85; }
+/* 手机模拟 */
+.phone{
+  position:relative;width:min(340px,92%);margin:0 auto;border-radius:46px;padding:14px;
+  background:linear-gradient(160deg,#1c2442,#0d1226);
+  box-shadow:0 40px 90px rgba(0,0,0,.55),inset 0 0 0 1.5px rgba(255,255,255,.08);
+}
+.phone .screen{background:#0a0f24;border-radius:34px;overflow:hidden;padding:18px 14px 16px}
+.phone .bar{display:flex;gap:6px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:10px}
+.phone .bar .w{flex:1;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.07);font-size:13px;color:#dfe3ff;white-space:nowrap;overflow:hidden}
+.phone .bar .w.hot{background:rgba(79,110,247,.35);color:#fff;box-shadow:inset 0 0 0 1px rgba(122,146,255,.5)}
+.phone .bar .fix{font-size:11px;color:#ffb4c8;background:rgba(236,72,153,.18);padding:7px 9px;border-radius:10px;white-space:nowrap}
+.phone .bar .x{width:30px;border-radius:10px;background:rgba(255,255,255,.06)}
+.phone .rows{display:grid;gap:8px}
+.phone .row{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.phone .row.r2{grid-template-columns:repeat(9,1fr);padding:0 14px}
+.phone .row.r3{grid-template-columns:1.5fr repeat(7,1fr) 1.5fr}
+.phone .row.r4{grid-template-columns:2fr 1fr 2.5fr 1.5fr}
+.phone .k{height:42px;border-radius:11px;background:rgba(255,255,255,.09);color:#dfe3ff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:600;transition:all .2s}
+.phone .k.big{background:rgba(79,110,247,.55);color:#fff;box-shadow:0 0 16px rgba(79,110,247,.5);font-size:16px}
+.phone .k.dim{background:rgba(255,255,255,.04);color:rgba(223,227,255,.3);font-size:11px}
+.phone .k.fn{background:rgba(255,255,255,.06);font-size:12px}
+.phone .float{
+  position:absolute;top:-10px;right:-16px;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:600;color:#fff;
+  background:linear-gradient(120deg,#4f6ef7,#8b5cf6);box-shadow:0 8px 24px rgba(79,110,247,.5);
+  transform:rotate(4deg);animation:float 5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:rotate(4deg) translateY(0)}50%{transform:rotate(4deg) translateY(-7px)}}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-top:64px;padding-bottom:72px;text-align:center}
+  .hero .tag{margin-inline:auto}.hero .points,.hero .actions{justify-content:center}.phone{margin-top:10px}}
 
-        .themes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-        .theme-dot {
-            width: 44px; height: 44px; border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,.12); transition: transform .2s;
-        }
-        .theme-dot:hover { transform: scale(1.15); }
+/* ── 通用区块 ── */
+section{padding:92px 0}
+.sec-head{max-width:640px;margin:0 auto 56px;text-align:center}
+.sec-head .kicker{font-size:13px;font-weight:700;letter-spacing:2px;color:#6d6dff;text-transform:uppercase}
+.sec-head h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;margin-top:10px;letter-spacing:.5px}
+.sec-head p{color:var(--ink2);margin-top:14px;font-size:16px}
 
-        footer {
-            text-align: center; padding: 40px 24px; font-size: 13px; color: #999;
-        }
-        footer a { color: #764ba2; text-decoration: none; }
-    </style>
+/* 卖点条 */
+.strip{background:var(--bg-dark);color:#fff}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.strip .cell{text-align:center;padding:10px 8px}
+.strip .num{font-size:clamp(30px,4vw,46px);font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.strip .lbl{font-size:13px;color:rgba(255,255,255,.65);margin-top:6px}
+@media(max-width:820px){.strip .wrap{grid-template-columns:repeat(2,1fr)}}
+
+/* 功能卡片 */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 26px;
+  box-shadow:0 8px 30px rgba(20,30,80,.06);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(20,30,80,.12)}
+.card .ico{width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(79,110,247,.14),rgba(236,72,153,.14))}
+.card h3{font-size:19px;font-weight:700;margin-bottom:8px}
+.card p{font-size:14.5px;color:var(--ink2)}
+.card .tag2{position:absolute;top:22px;right:22px;font-size:11px;color:#fff;background:var(--grad);padding:3px 10px;border-radius:999px}
+
+/* 双栏亮点 */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.duo .txt h2{font-size:clamp(26px,3vw,36px);font-weight:800;margin-bottom:18px}
+.duo .txt .lead{color:var(--ink2);margin-bottom:26px;font-size:16px}
+.duo .txt .ul{display:grid;gap:14px}
+.duo .txt li{list-style:none;display:flex;gap:12px;font-size:15px}
+.duo .txt li .dot{flex:none;width:24px;height:24px;border-radius:8px;background:var(--grad);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.duo .txt li b{display:block;font-weight:700}
+.duo .txt li span{color:var(--ink2);font-size:13.5px}
+@media(max-width:900px){.duo{grid-template-columns:1fr;gap:40px}}
+
+/* 键盘示意（引擎节） */
+.kb-demo{border:1px solid rgba(255,255,255,.1);border-radius:26px;padding:22px;background:linear-gradient(160deg,#1a2240,#0d1226);color:#fff;box-shadow:0 30px 70px rgba(10,15,40,.35)}
+.kb-demo .cap{font-size:13px;color:rgba(255,255,255,.6);text-align:center;margin-bottom:14px}
+.kb-demo .drow{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-bottom:8px}
+.kb-demo .drow.r2{grid-template-columns:repeat(9,1fr);padding:0 12px}
+.kb-demo .dk{height:40px;border-radius:11px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
+.kb-demo .dk.big{background:rgba(79,110,247,.6);box-shadow:0 0 18px rgba(79,110,247,.55)}
+.kb-demo .dk.small{background:rgba(255,255,255,.05);color:rgba(255,255,255,.28);font-size:11px}
+.kb-demo .leg{display:flex;gap:18px;justify-content:center;margin-top:16px;font-size:12px;color:rgba(255,255,255,.65)}
+.kb-demo .leg i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+.kb-demo .leg .l1{background:rgba(79,110,247,.6)}
+.kb-demo .leg .l2{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15)}
+
+/* 手势区 */
+.gestures{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.g{
+  background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;text-align:center;
+  box-shadow:0 8px 30px rgba(20,30,80,.06);transition:transform .25s;
+}
+.g:hover{transform:translateY(-6px)}
+.g .arr{width:58px;height:58px;border-radius:18px;margin:0 auto 14px;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px}
+.g h3{font-size:16.5px;font-weight:700}
+.g p{font-size:13.5px;color:var(--ink2);margin-top:6px}
+
+/* 皮肤 */
+.skins{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.skin{
+  background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;
+  box-shadow:0 8px 30px rgba(20,30,80,.06);
+}
+.skin h3{font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
+.skin .lvl{font-size:11px;color:#fff;border-radius:999px;padding:2px 10px}
+.skin .free{background:#22c55e}.skin .buy{background:#f59e0b}.skin .sub{background:var(--grad)}
+.skin .dots{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.skin .sd{width:46px;height:46px;border-radius:13px;box-shadow:0 2px 10px rgba(0,0,0,.14);transition:transform .2s}
+.skin .sd:hover{transform:scale(1.18)}
+.skin p{font-size:13.5px;color:var(--ink2);margin-top:16px}
+
+/* 隐私 */
+.privacy{background:linear-gradient(150deg,#05070f,#0b1026 60%,#120b26);color:#fff;position:relative;overflow:hidden}
+.privacy::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;top:-260px;left:-120px;background:radial-gradient(circle,rgba(79,110,247,.22),transparent 65%)}
+.privacy .wrap{position:relative}
+.privacy .sec-head h2{color:#fff}
+.privacy .sec-head p{color:rgba(255,255,255,.65)}
+.privacy .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.privacy .pc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:28px 24px;backdrop-filter:blur(10px)}
+.privacy .pc .em{font-size:34px;margin-bottom:12px}
+.privacy .pc h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.privacy .pc p{font-size:13.5px;color:rgba(255,255,255,.65)}
+.privacy .footnote{margin-top:30px;font-size:13px;color:rgba(255,255,255,.5);text-align:center}
+.privacy .footnote b{color:rgba(255,255,255,.85)}
+
+/* 订阅 */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:960px;margin:0 auto}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:34px 28px;position:relative;box-shadow:0 10px 34px rgba(20,30,80,.07)}
+.plan.hot{border:2px solid #8b5cf6;box-shadow:0 20px 54px rgba(139,92,246,.25)}
+.plan .hotbadge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:12px;padding:5px 16px;border-radius:999px;font-weight:600;white-space:nowrap}
+.plan h3{font-size:18px;font-weight:800}
+.plan .price{font-size:30px;font-weight:800;margin:12px 0 4px}
+.plan .price small{font-size:13px;color:var(--ink2);font-weight:400}
+.plan .d{font-size:13px;color:var(--ink2);min-height:40px}
+.plan ul{list-style:none;margin:18px 0 24px;display:grid;gap:10px}
+.plan li{font-size:14px;display:flex;gap:10px;align-items:flex-start}
+.plan li::before{content:"✓";flex:none;width:20px;height:20px;border-radius:7px;background:rgba(79,110,247,.14);color:#4f6ef7;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.plan .buy2{display:block;text-align:center;padding:13px;border-radius:16px;font-weight:700;font-size:15px;background:#f1f3ff;color:#4f6ef7;transition:.2s}
+.plan.hot .buy2{background:var(--grad);color:#fff;box-shadow:0 8px 24px rgba(139,92,246,.4)}
+.plan .buy2:hover{transform:translateY(-2px)}
+@media(max-width:820px){.plans{grid-template-columns:1fr}}
+
+/* 底部 */
+footer{background:#05070f;color:rgba(255,255,255,.5);text-align:center;padding:48px 24px;font-size:13px}
+footer a{color:rgba(255,255,255,.8);margin:0 8px}
+footer a:hover{color:#fff}
+footer .sep{opacity:.3;margin:0 4px}
+
+/* 滚动浮现 */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
 
-<div class="hero">
-    <img class="icon" src="icon.png" alt="咕咕拼音">
-    <h1>咕咕拼音</h1>
-    <p>零权限 · 不联网 · 不追踪 —— 用自研本地引擎打造的真隐私拼音输入法</p>
-    <div class="badges">
-        <span class="badge">🔒 无需完全访问</span>
-        <span class="badge">🚀 纯离线引擎</span>
-        <span class="badge">🎨 14款皮肤</span>
-        <span class="badge">🧠 智能引导</span>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="icon.png" alt="咕咕拼音">咕咕拼音</a>
+    <div class="links">
+      <a href="#engine">自研引擎</a>
+      <a href="#guide">智能引导</a>
+      <a href="#gesture">手势交互</a>
+      <a href="#skin">皮肤</a>
+      <a href="#privacy">隐私</a>
+      <a href="#plan">订阅</a>
     </div>
-    <a class="download-btn" href="https://apps.apple.com/app/id6741605266" target="_blank">📲 App Store 下载</a>
+    <a class="cta" href="https://apps.apple.com/app/id6741605266" target="_blank">立即下载</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <img class="icon" src="icon.png" alt="咕咕拼音">
+      <h1>你的键盘，<br><span class="grad">真的属于你</span></h1>
+      <p class="tag">零权限 · 不联网 · 不追踪 —— 用自研本地引擎打造的真隐私拼音输入法。打字这件事，应该只发生在你的手机上。</p>
+      <div class="points">
+        <span class="point">🔒 无需「允许完全访问」</span>
+        <span class="point">🚫 键盘零网络能力</span>
+        <span class="point">🧠 智能缩放 + 误触纠错</span>
+        <span class="point">🎨 19 款皮肤</span>
+        <span class="point">📴 完全离线可用</span>
+      </div>
+      <div class="actions">
+        <a class="btn-download" href="https://apps.apple.com/app/id6741605266" target="_blank">
+          <svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          从 App Store 下载
+        </a>
+        <div class="sub">免费基础功能 · 永久无广告<br>iPhone / iPad 全键盘拼音 · <b>已上架 App Store</b></div>
+      </div>
+    </div>
+
+    <!-- 手机键盘模拟 -->
+    <div class="phone">
+      <div class="float">拼音智能缩放中</div>
+      <div class="screen">
+        <div class="bar">
+          <span class="w hot">你好</span>
+          <span class="w">你好呀</span>
+          <span class="w">尼豪</span>
+          <span class="fix">纠错</span>
+          <span class="x"></span>
+        </div>
+        <div class="rows">
+          <div class="row">
+            <span class="k dim">q</span><span class="k dim">w</span><span class="k dim">e</span><span class="k dim">r</span><span class="k dim">t</span><span class="k">y</span><span class="k">u</span><span class="k">i</span><span class="k">o</span><span class="k">p</span>
+          </div>
+          <div class="row r2">
+            <span class="k dim">a</span><span class="k dim">s</span><span class="k dim">d</span><span class="k dim">f</span><span class="k dim">g</span><span class="k">h</span><span class="k big">j</span><span class="k">k</span><span class="k">l</span>
+          </div>
+          <div class="row r3">
+            <span class="k fn">⇧</span><span class="k dim">z</span><span class="k dim">x</span><span class="k dim">c</span><span class="k dim">v</span><span class="k dim">b</span><span class="k">n</span><span class="k">m</span><span class="k fn">⌫</span>
+          </div>
+          <div class="row r4">
+            <span class="k fn">123</span><span class="k">😊</span><span class="k fn">空格</span><span class="k fn">回车</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 卖点条 -->
+<div class="strip">
+  <div class="wrap">
+    <div class="cell"><div class="num">0</div><div class="lbl">联网权限 / 追踪 / 上传</div></div>
+    <div class="cell"><div class="num">0</div><div class="lbl">需授予「完全访问」</div></div>
+    <div class="cell"><div class="num">19</div><div class="lbl">款皮肤 · 三档权益</div></div>
+    <div class="cell"><div class="num">ms</div><div class="lbl">级本地解码响应</div></div>
+  </div>
 </div>
 
-<section>
-    <h2>为什么选择咕咕拼音</h2>
-    <div class="features">
-        <div class="feature-card">
-            <div class="icon">🔐</div>
-            <h3>绝对隐私</h3>
-            <p>不要求「完全访问」权限，键盘扩展零网络能力，你敲下的每个字都不离开手机。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">⚡</div>
-            <h3>自研引擎</h3>
-            <p>拼音转换、词组匹配、候选排序全在本地完成，无云端、零延迟。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🧠</div>
-            <h3>智能引导</h3>
-            <p>打字时自动高亮合法后继字母，半透明淡化非法键，助你快速定位。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🎨</div>
-            <h3>精美皮肤</h3>
-            <p>内置 14 款主题皮肤，一键切换全键变色——樱花、极光、莫兰迪……总有一款适合你。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">👆</div>
-            <h3>滑动输入</h3>
-            <p>首行键下滑输数字、上滑出标点表情弹窗，退格左滑清空，手势操作一气呵成。</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">💬</div>
-            <h3>英文拼写纠错</h3>
-            <p>英文模式下自动检测拼写错误并给出建议，一键修正，中英混输无缝切换。</p>
-        </div>
+<!-- 为什么选择 -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Why Gugu</div>
+      <h2>为什么选择咕咕拼音</h2>
+      <p>把「隐私」和「体验」同时做到极致，是咕咕拼音存在的全部理由。</p>
     </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="ico">🔐</div>
+        <span class="tag2">核心</span>
+        <h3>绝对隐私</h3>
+        <p>不要求「允许完全访问」权限，键盘扩展由系统强制隔离、不具备网络能力。你敲下的每一个字，都不离开这台设备。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">⚡</div>
+        <span class="tag2">自研</span>
+        <h3>自研拼音引擎</h3>
+        <p>mmap 内存映射词库 + k-best Viterbi 整句解码，词组匹配、候选排序、联想全部本地完成——毫秒级响应，无云端、无延迟。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">🧠</div>
+        <span class="tag2">智能</span>
+        <h3>智能输入引导</h3>
+        <p>拼音智能缩放、误触纠错、英文拼写纠错、词组联想，四重能力帮你把每个字打对、打快。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">👆</div>
+        <h3>手势驱动操作</h3>
+        <p>上滑、下滑、左滑，一个键盘三种滑法；长按标点/表情弹出大面板，30 个常用符号、60 个常用表情，一气呵成。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">🎨</div>
+        <h3>19 款皮肤定制</h3>
+        <p>经典免费、进阶买断、高级订阅三档；默认青、暗夜、樱花、极光、莫兰迪、液态玻璃……一键切换全键配色，实时预览。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">💬</div>
+        <h3>英文拼写纠错</h3>
+        <p>英文模式下自动检测拼写错误，候选栏直接给出正确拼写建议，点击即替换，中英混输无缝衔接。</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section>
-    <div class="privacy">
-        <h2>你的隐私，我们来守护</h2>
-        <div class="items">
-            <div class="item"><div class="emoji">📵</div><p>不联网<br>不请求网络权限</p></div>
-            <div class="item"><div class="emoji">🔇</div><p>不追踪<br>不采集打字内容</p></div>
-            <div class="item"><div class="emoji">🚫</div><p>不上传<br>数据全在本地</p></div>
-            <div class="item"><div class="emoji">🛡️</div><p>不授权<br>无需"完全访问"</p></div>
+<!-- 自研引擎 -->
+<section id="engine" style="background:#fff">
+  <div class="wrap">
+    <div class="duo">
+      <div class="txt reveal">
+        <div class="kicker" style="font-size:13px;font-weight:700;letter-spacing:2px;color:#6d6dff">Engine</div>
+        <h2>自研本地引擎<br>毫秒级整句解码</h2>
+        <p class="lead">拼音转换的每一步都发生在你的设备上，没有云端、没有等待、没有缓存到别人的服务器。</p>
+        <ul class="ul">
+          <li><span class="dot">1</span><div><b>mmap 内存映射词库</b><span>词库常驻内存，查询无 IO 延迟；软音节候选严格按拼音规则校验。</span></div></li>
+          <li><span class="dot">2</span><div><b>k-best Viterbi 整句解码</b><span>多音节一次组句，词组搭配与上下文联想层层加权，候选即出即现。</span></div></li>
+          <li><span class="dot">3</span><div><b>逐段上屏</b><span>候选可分段提交：先上屏前半句，剩余拼音继续组句，长句输入不打断。</span></div></li>
+          <li><span class="dot">4</span><div><b>完全离线</b><span>关掉网络、开启飞行模式，打字体验一模一样——因为本来就不需要网络。</span></div></li>
+        </ul>
+      </div>
+      <div class="kb-demo reveal">
+        <div class="cap">输入 ni 之后 · 合法后继字母自动放大，非法字母缩小淡化</div>
+        <div class="drow">
+          <span class="dk small">q</span><span class="dk small">w</span><span class="dk small">e</span><span class="dk small">r</span><span class="dk small">t</span><span class="dk small">y</span><span class="dk small">u</span><span class="dk big">i</span><span class="dk">o</span><span class="dk small">p</span>
         </div>
+        <div class="drow r2">
+          <span class="dk small">a</span><span class="dk small">s</span><span class="dk small">d</span><span class="dk small">f</span><span class="dk small">g</span><span class="dk">h</span><span class="dk">j</span><span class="dk small">k</span><span class="dk small">l</span>
+        </div>
+        <div class="drow" style="grid-template-columns:1.5fr repeat(7,1fr) 1.5fr">
+          <span class="dk small">⇧</span><span class="dk small">z</span><span class="dk small">x</span><span class="dk small">c</span><span class="dk small">v</span><span class="dk small">b</span><span class="dk small">n</span><span class="dk small">m</span><span class="dk small">⌫</span>
+        </div>
+        <div class="leg"><span><i class="l1"></i>放大：下一步可打</span><span><i class="l2"></i>淡化：此路不通</span></div>
+      </div>
     </div>
+  </div>
 </section>
 
-<section>
-    <h2>精选皮肤</h2>
-    <div class="themes">
-        <div class="theme-dot" style="background:#007AFF" title="默认"></div>
-        <div class="theme-dot" style="background:linear-gradient(135deg,#2d2d2d,#1a1a1a)" title="暗夜"></div>
-        <div class="theme-dot" style="background:linear-gradient(135deg,#FF69B4,#FFB6C1)" title="樱花"></div>
-        <div class="theme-dot" style="background:linear-gradient(135deg,#7B68EE,#9B59B6)" title="极光"></div>
-        <div class="theme-dot" style="background:linear-gradient(135deg,#00BCD4,#0D7377)" title="暗夜·青"></div>
-        <div class="theme-dot" style="background:linear-gradient(135deg,#9C27B0,#7B1FA2)" title="暗夜·紫"></div>
-        <div class="theme-dot" style="background:linear-gradient(135deg,#FF4081,#C2185B)" title="暗夜·粉"></div>
-        <div class="theme-dot" style="background:linear-gradient(135deg,#FFC107,#F57C00)" title="暗夜·金"></div>
+<!-- 智能引导 -->
+<section id="guide">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Smart Guide</div>
+      <h2>四重智能，帮你把字打对、打快</h2>
+      <p>不打扰，但在你快要出错时，总能轻轻拉你一把。</p>
     </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="ico">🔎</div>
+        <h3>拼音智能缩放</h3>
+        <p>打字时合法后继字母自动放大、非法字母自动缩小，视觉直接引导下一键的位置——新手免背键位，熟手提速定位。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">🩹</div>
+        <span class="tag2">误触救星</span>
+        <h3>误触纠错</h3>
+        <p>邻键误触、漏打、多打、换位，软解码自动找出"你大概想打什么"，候选栏带橙色「纠错」标记呈现，绝不喧宾夺主、绝不替你上屏。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">🌐</div>
+        <h3>英文拼写纠错</h3>
+        <p>英文模式下检测拼写错误并给出建议，点击即替换；中英输入一键切换，中文键盘同样顺手。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">💡</div>
+        <h3>词组联想</h3>
+        <p>候选栏智能联想词组与常见搭配，越用越懂你——联想数据同样只存在本地。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 手势 -->
+<section id="gesture" style="background:#fff">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Gestures</div>
+      <h2>一个键盘，三种滑法</h2>
+      <p>把最常用的操作，做到手指不用离开键盘。</p>
+    </div>
+    <div class="gestures">
+      <div class="g reveal"><div class="arr">↓</div><h3>下滑首行键</h3><p>q→1、w→2… 字母模式下直接下滑输出数字，无需切换键盘。</p></div>
+      <div class="g reveal"><div class="arr">↑</div><h3>上滑 ⇧ 键</h3><p>在字母与数字模式间快速切换；上滑标点/表情键弹出小面板。</p></div>
+      <div class="g reveal"><div class="arr">←</div><h3>左滑 ⌫ 键</h3><p>短滑连续删除，滑过半程一键清空当前输入，删错了也不怕。</p></div>
+      <div class="g reveal"><div class="arr">⊕</div><h3>长按大面板</h3><p>长按标点/表情键弹出更大覆盖面板：30 个常用符号、60 个常用表情，点选即上屏即关闭。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 皮肤 -->
+<section id="skin">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Themes</div>
+      <h2>19 款皮肤，三档权益</h2>
+      <p>从经典纯净到高级定制，总有一款皮肤长在你的审美上。</p>
+    </div>
+    <div class="skins">
+      <div class="skin reveal">
+        <h3>经典 <span class="lvl free">免费</span></h3>
+        <div class="dots">
+          <div class="sd" style="background:#0aa8c2" title="默认青"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#2d2d2d,#141414)" title="暗夜"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#3a7bfd,#1b3a8f)" title="蓝调"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#a78bfa,#6d5bd0)" title="薰衣草"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#5eead4,#0f766e)" title="薄荷"></div>
+        </div>
+        <p>默认青 · 暗夜 · 蓝调 · 薰衣草 · 薄荷 —— 基础手感与颜值，永久免费。</p>
+      </div>
+      <div class="skin reveal">
+        <h3>进阶 <span class="lvl buy">买断</span></h3>
+        <div class="dots">
+          <div class="sd" style="background:linear-gradient(135deg,#00BCD4,#0D7377)" title="暗夜·青"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#9C27B0,#6A1B9A)" title="暗夜·紫"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#FF4081,#AD1457)" title="暗夜·粉"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#FFC107,#E65100)" title="暗夜·金"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#0288D1,#01579B)" title="海洋"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#388E3C,#1B5E20)" title="森野"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#F48FB1,#D81B60)" title="蜜桃粉"></div>
+        </div>
+        <p>暗夜四色 · 海洋 · 森野 · 蜜桃粉 —— 一次买断，永久使用。</p>
+      </div>
+      <div class="skin reveal">
+        <h3>高级 <span class="lvl sub">订阅</span></h3>
+        <div class="dots">
+          <div class="sd" style="background:linear-gradient(135deg,#FF69B4,#FFB6C1)" title="樱花"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#F97316,#C2410C)" title="落日"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#B8B5B5,#7D7A7A)" title="莫兰迪"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#7B68EE,#9B59B6)" title="极光"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#8BC34A,#33691E)" title="抹茶"></div>
+          <div class="sd" style="background:linear-gradient(135deg,#1a1a40,#3b3b8f)" title="星夜"></div>
+          <div class="sd" style="background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(200,220,255,.75))" title="液态玻璃"></div>
+        </div>
+        <p>樱花 · 落日 · 莫兰迪 · 极光 · 抹茶 · 星夜 · 液态玻璃 —— 订阅专属，持续上新。</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:72px">
+      <div class="kicker">Personalize</div>
+      <h2>键盘手感，由你定义</h2>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="ico">📳</div>
+        <h3>震感反馈</h3>
+        <p>每次按键都有细腻的触觉反馈，强度可独立调节，也可以一键关闭——安静模式友好。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">🔊</div>
+        <h3>按键音效</h3>
+        <p>清脆的机械键盘音效，独立开关与音量调节，打字更有节奏感。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">␣</div>
+        <h3>空格键标签</h3>
+        <p>订阅用户可自定义空格键上显示的文字（最多 6 字），把常用短语放上键盘。</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico">▦</div>
+        <h3>字母键布局</h3>
+        <p>第二行字母可选「等宽」或「充满整个宽度」两种静态布局，贴合你的打字习惯。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 隐私 -->
+<section class="privacy" id="privacy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker" style="color:#8b9dff">Privacy</div>
+      <h2>你的隐私，我们来守护</h2>
+      <p>隐私不是卖点，是底线。</p>
+    </div>
+    <div class="grid">
+      <div class="pc reveal">
+        <div class="em">📵</div>
+        <h3>零网络</h3>
+        <p>键盘扩展不请求任何网络权限，系统强制隔离——它根本没有联网的能力。</p>
+      </div>
+      <div class="pc reveal">
+        <div class="em">🔇</div>
+        <h3>零追踪</h3>
+        <p>不采集、不记录、不上传你的任何输入内容与使用行为。</p>
+      </div>
+      <div class="pc reveal">
+        <div class="em">🔒</div>
+        <h3>零权限</h3>
+        <p>无需「允许完全访问」——这是 iOS 输入法能给出的最高隐私承诺。</p>
+      </div>
+      <div class="pc reveal">
+        <div class="em">📴</div>
+        <h3>全本地</h3>
+        <p>词库、解码、联想、纠错全部在设备本地完成，飞行模式照常使用。</p>
+      </div>
+    </div>
+    <p class="footnote reveal">主 App 仅在你主动打开购买页时才会连接 App Store 完成支付；关闭主 App 的网络权限后，<b>键盘功能完全不受影响</b>。</p>
+  </div>
+</section>
+
+<!-- 订阅 -->
+<section id="plan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Membership</div>
+      <h2>免费的，永远免费</h2>
+      <p>基础功能与 5 款经典皮肤永久免费、无广告。进阶与高级权益，按需解锁。</p>
+    </div>
+    <div class="plans">
+      <div class="plan reveal">
+        <h3>免费</h3>
+        <div class="price">¥0</div>
+        <div class="d">永久 · 无广告</div>
+        <ul>
+          <li>完整拼音输入 + 词组联想</li>
+          <li>智能缩放 / 误触纠错</li>
+          <li>手势操作全部可用</li>
+          <li>5 款经典皮肤</li>
+          <li>震感 / 音效调节</li>
+        </ul>
+        <a class="buy2" href="https://apps.apple.com/app/id6741605266" target="_blank">立即体验</a>
+      </div>
+      <div class="plan hot reveal">
+        <span class="hotbadge">最多人选择</span>
+        <h3>永久买断</h3>
+        <div class="price">一次<span style="font-size:15px;font-weight:600">付费</span></div>
+        <div class="d">一次购买，永久使用</div>
+        <ul>
+          <li>免费版全部功能</li>
+          <li>7 款进阶皮肤</li>
+          <li>拼音智能缩放解锁</li>
+          <li>退格左滑清空 / 删除</li>
+          <li>永久无广告</li>
+        </ul>
+        <a class="buy2" href="https://apps.apple.com/app/id6741605266" target="_blank">解锁永久权益</a>
+      </div>
+      <div class="plan reveal">
+        <h3>年订阅</h3>
+        <div class="price">年<span style="font-size:15px;font-weight:600">订阅</span></div>
+        <div class="d">全部功能 · 持续上新</div>
+        <ul>
+          <li>买断版全部权益</li>
+          <li>7 款高级皮肤</li>
+          <li>英文拼写纠错</li>
+          <li>自定义空格键标签</li>
+          <li>专属功能持续迭代</li>
+        </ul>
+        <a class="buy2" href="https://apps.apple.com/app/id6741605266" target="_blank">订阅全部功能</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-    <p>
-        <a href="https://nigoolasi.github.io/policy/pinyin-privacy.html" target="_blank">隐私政策</a>
-        &nbsp;·&nbsp;
-        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank">使用条款</a>
-    </p>
-    <p style="margin-top:8px">© 2026 咕咕拼音 · 你的隐私，值得守护</p>
+  <p>
+    <a href="https://nigoolasi.github.io/policy/pinyin-privacy.html" target="_blank">隐私政策</a>
+    <span class="sep">·</span>
+    <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank">使用条款</a>
+    <span class="sep">·</span>
+    <a href="https://apps.apple.com/app/id6741605266" target="_blank">App Store</a>
+  </p>
+  <p style="margin-top:10px">© 2026 咕咕拼音 · 你的隐私，值得守护</p>
 </footer>
 
+<script>
+// 滚动浮现
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}
+    });
+  },{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
 </body>
 </html>
