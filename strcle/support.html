@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技术支持 · 嘎嘎笔画-智能隐私输入法</title>
+    <style>
+        :root {
+            --text: #1d1d1f;
+            --secondary: #6e6e73;
+            --bg: #ffffff;
+            --card: #f5f5f7;
+            --border: #d2d2d7;
+            --accent: #002FA7;
+            --gold: #8A6D00;
+            --max-w: 760px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        header {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        header h1 {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 24px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+        }
+        header p {
+            max-width: var(--max-w);
+            margin: 4px auto 0;
+            padding: 0 24px;
+            color: var(--secondary);
+            font-size: 15px;
+        }
+        .lang-switch {
+            max-width: var(--max-w);
+            margin: 12px auto 0;
+            padding: 0 24px;
+            display: flex;
+            gap: 8px;
+        }
+        .lang-switch button {
+            font: inherit;
+            font-size: 14px;
+            padding: 6px 18px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--secondary);
+            border-radius: 980px;
+            cursor: pointer;
+            transition: all .15s ease;
+        }
+        .lang-switch button.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        main {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 32px 24px 64px;
+        }
+        section { margin-bottom: 36px; }
+        h2 {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+        h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 16px 0 6px;
+        }
+        p, li { font-size: 16px; color: #333; }
+        p + p { margin-top: 10px; }
+        ul { padding-left: 20px; margin: 8px 0; }
+        li { margin-bottom: 6px; }
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin: 14px 0;
+        }
+        .tag {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            background: rgba(212,175,55,0.16);
+            border-radius: 6px;
+            padding: 2px 8px;
+            margin-left: 6px;
+        }
+        .nav-links {
+            max-width: var(--max-w);
+            margin: 10px auto 0;
+            padding: 0 24px;
+            font-size: 14px;
+        }
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code {
+            background: var(--card);
+            border-radius: 5px;
+            padding: 1px 6px;
+            font-size: 14px;
+        }
+        body.lang-zh .en { display: none; }
+        body.lang-en .zh { display: none; }
+    </style>
+</head>
+<body class="lang-zh">
+
+<header>
+    <h1>技术支持 · 嘎嘎笔画-智能隐私输入法</h1>
+    <p>
+        <span class="zh">功能、会员与常见问题 · 最后更新：2026年9月14日</span>
+        <span class="en">Features, Membership &amp; FAQ · Last updated: September 14, 2026</span>
+    </p>
+    <div class="lang-switch">
+        <button class="active" data-lang="zh">中文</button>
+        <button data-lang="en">English</button>
+    </div>
+    <div class="nav-links">
+        <a href="index.html"><span class="zh">← 返回主页</span><span class="en">← Back to home</span></a>
+        &nbsp;·&nbsp;
+        <a href="privacy.html"><span class="zh">隐私政策</span><span class="en">Privacy Policy</span></a>
+    </div>
+</header>
+
+<main>
+
+<!-- A. 功能与设置使用 FAQ -->
+<section>
+    <div class="zh">
+        <h2>A. 功能与设置使用 FAQ</h2>
+
+        <h3>如何启用键盘？</h3>
+        <p>前往 <code>设置 → 通用 → 键盘 → 键盘 → 添加新键盘</code>，选择「嘎嘎」，按提示完成添加。在任意可输入界面点击地球仪 🌐 图标即可切换到本键盘。首次使用<strong>无需任何权限，也无需开启"允许完全访问"</strong>。</p>
+
+        <h3>支持哪些输入方式？</h3>
+        <ul>
+            <li><strong>五笔画输入：</strong>按汉字书写顺序输入横、竖、撇、捺、折五种基本笔画，不认识拼音也能打字。</li>
+            <li><strong>词格整句：</strong>多段输入经词格解码与逐字语言模型排序，长词、词组联想更准更顺。</li>
+            <li><strong>分词键：</strong>手动切分词组边界，帮助引擎更准确地成词（免费）。</li>
+            <li><strong>上滑输入：</strong>标点键上滑弹出符号面板，表情键上滑弹出常用 emoji，手指不离开键盘。</li>
+        </ul>
+
+        <h3>大字模式是什么？<span class="tag">免费</span></h3>
+        <p>专为长辈与视力不佳的用户设计。开启后第一个候选字会以大字号显示在键盘左上角，看得清、点得准；问号等不常用键会隐藏，把空间让给候选。老人、父母也能轻松上手。</p>
+
+        <h3>键盘外观自定义<span class="tag">免费</span></h3>
+        <p>在主 App 设置里，可对字母键、数字键、功能键分别调整字号、字重、圆角与字体，并控制表情键的显示。改完键盘下次输入时生效。</p>
+
+        <h3>内置哪些词库？</h3>
+        <ul>
+            <li>自研本地笔画词典，覆盖日常与专业用语，纯离线运行。</li>
+            <li>字频学习与个人词条，随你越用越准。</li>
+            <li>词格整句语言模型，长句分词与候选排序更聪明。</li>
+        </ul>
+
+        <h3>如何管理学习词库 / 剪贴板历史？</h3>
+        <p>本键盘会学习你的选字习惯以优化候选排序，所有学习数据仅保存在本机（App Group 容器内）。如需清空，请在主 App 设置中找到对应的一键清空项操作，不会影响系统内置词库。剪贴板历史（会员）同样可在设置中一键清空。</p>
+
+        <h3>皮肤与外观</h3>
+        <ul>
+            <li>经典皮肤免费；彩虹渐变、霓虹、赛博、星夜、奶黄、Q弹等进阶 / 高级皮肤需会员。</li>
+            <li>更换皮肤后所有按键同步变色，所见即所得，并跟随系统亮 / 暗模式。</li>
+        </ul>
+
+        <h3>iCloud 用户词同步<span class="tag">免费</span></h3>
+        <p>开启后，常打的字词会通过你自己的 iCloud 在你的设备间同步，换机登录同一 Apple ID 即找回。数据存储在你自己的 iCloud 私有空间，我们不运营服务器、也无法读取。键盘扩展本身不联网。</p>
+    </div>
+    <div class="en">
+        <h2>A. Features &amp; Setup FAQ</h2>
+
+        <h3>How do I enable the keyboard?</h3>
+        <p>Go to <code>Settings → General → Keyboard → Keyboards → Add New Keyboard</code>, select "嘎嘎 / Gaga", and follow the prompts. Tap the 🌐 (globe) icon in any text field to switch to this keyboard. No permissions are required on first use, and <strong>"Allow Full Access" is not needed</strong>.</p>
+
+        <h3>What input methods are supported?</h3>
+        <ul>
+            <li><strong>Five-stroke input:</strong> type the five basic strokes — horizontal, vertical, left-falling, dot, turning — in writing order, so you can type without knowing Pinyin.</li>
+            <li><strong>Lattice-based sentence input:</strong> multi-segment input is decoded through a word lattice and character-level language model for longer, smarter phrases.</li>
+            <li><strong>Segment key:</strong> manually split phrase boundaries to help the engine form words more accurately (free).</li>
+            <li><strong>Swipe-up input:</strong> swipe up on the punctuation key for symbols, or the emoji key for common emojis — without leaving the keyboard.</li>
+        </ul>
+
+        <h3>What is large-text mode?<span class="tag">Free</span></h3>
+        <p>Designed for elders and low-vision users. When enabled, the top candidate appears at a larger size in the top-left of the keyboard — easier to read and tap; less-used keys such as "?" are hidden to give candidates more room. It makes typing approachable even for parents and grandparents.</p>
+
+        <h3>Appearance control<span class="tag">Free</span></h3>
+        <p>In the main app's settings you can adjust font size, weight, corner radius, and typeface for letter, number, and function keys separately, and control whether the emoji key is shown. Changes apply to the keyboard's next appearance.</p>
+
+        <h3>What dictionaries are built in?</h3>
+        <ul>
+            <li>A self-built local stroke dictionary covering everyday and professional usage, running fully offline.</li>
+            <li>Word-frequency learning and personal entries that improve as you type.</li>
+            <li>A lattice-based language model for smarter segmentation and candidate ranking.</li>
+        </ul>
+
+        <h3>How do I manage the learning dictionary / clipboard history?</h3>
+        <p>The keyboard learns your choices to improve candidate ranking; all learning data stays on your device (in the App Group container). To clear it, use the one-tap option in the main app's settings — it does not affect the built-in system dictionaries. Clipboard history (members) can likewise be cleared in one tap.</p>
+
+        <h3>Themes &amp; appearance</h3>
+        <ul>
+            <li>Classic themes are free; Rainbow, Neon, Cyber, Starry, Cream, Bouncy and other advanced/premium themes require membership.</li>
+            <li>All keys recolor together when you switch themes, and it follows the system Light / Dark mode.</li>
+        </ul>
+
+        <h3>iCloud word sync<span class="tag">Free</span></h3>
+        <p>When enabled, the words you use most sync between your devices through your own iCloud — sign in with the same Apple ID on a new device and they're back. The data lives in your own iCloud private space; we run no servers and cannot read it. The keyboard extension itself never connects to the network.</p>
+    </div>
+</section>
+
+<!-- B. 会员 / 内购与退款说明 -->
+<section>
+    <div class="zh">
+        <h2>B. 会员 / 内购与退款说明</h2>
+
+        <h3>购买模式</h3>
+        <ul>
+            <li><strong>免费版：</strong>完整笔画输入、词格整句、词组联想、分词键、全部手势、大字模式、经典皮肤、键盘外观自定义、iCloud 词同步——全部免费。</li>
+            <li><strong>年订阅（推荐）：</strong>主推档位，现有功能与后续新功能免费享，平均每天仅需 ¥0.16 左右。含 5 天免费体验。<span class="tag">会员</span></li>
+            <li><strong>月订阅：</strong>灵活按月付费，随时可取消。<span class="tag">会员</span></li>
+            <li><strong>永久买断：</strong>一次购买永久使用，后续新功能可能需额外付费。<span class="tag">会员</span></li>
+        </ul>
+
+        <h3>会员解锁哪些功能？</h3>
+        <div class="card">
+            <p><strong>免费已含：</strong>笔画输入 · 全部手势 · 分词键 · 大字模式 · 经典皮肤 · 键盘外观自定义 · iCloud 词同步 · 隐私零联网。</p>
+            <p><strong>会员解锁：</strong>退格左滑清空 · 剪贴板历史（长按空格，最近 30 条）· 全部进阶 / 高级皮肤 · 打字加速彩蛋（速度光环）。</p>
+            <p><strong>订阅额外（规划中）：</strong>AI 预测打字（基于 Apple 智能）仅订阅用户可用，永久买断不含。</p>
+        </div>
+        <p style="color:var(--secondary);font-size:14px;">具体价格、试用时长与到期时间以 App Store 与 App 内实际展示为准。</p>
+
+        <h3>如何恢复购买？</h3>
+        <p>更换设备或重装后，打开主 App，点击「恢复已购项目」即可将已购项目同步回当前 Apple ID，无需重复付费。</p>
+
+        <h3>如何取消订阅？</h3>
+        <p>iPhone 设置 → Apple ID → 订阅 → 找到「嘎嘎笔画-智能隐私输入法」→ 取消订阅。订阅到期前不会扣费，到期后可随时重新订阅。</p>
+
+        <h3>如何申请退款？</h3>
+        <p>所有支付均由 Apple 处理，开发者无法直接退款。如需退款，请通过 Apple 官方渠道申请：</p>
+        <ul>
+            <li>访问 <a href="https://reportaproblem.apple.com" target="_blank">reportaproblem.apple.com</a>，使用同一 Apple ID 登录。</li>
+            <li>找到对应订单，选择「报告问题 / 申请退款」并按提示操作。</li>
+            <li>退款结果由 Apple 审核决定，通常 1–2 周内处理完毕。</li>
+        </ul>
+    </div>
+    <div class="en">
+        <h2>B. Membership, In-App Purchases &amp; Refunds</h2>
+
+        <h3>Purchase models</h3>
+        <ul>
+            <li><strong>Free version:</strong> full stroke input, lattice-based sentence input, phrase prediction, the segment key, all gestures, large-text mode, classic themes, appearance control, and iCloud word sync — all free.</li>
+            <li><strong>Yearly (recommended):</strong> the primary plan — all current features plus future ones, at roughly ¥0.16 per day. Includes a 5-day free trial. <span class="tag">Member</span></li>
+            <li><strong>Monthly:</strong> flexible month-to-month, cancel anytime. <span class="tag">Member</span></li>
+            <li><strong>Lifetime:</strong> one-time purchase, use forever; some future features may cost extra. <span class="tag">Member</span></li>
+        </ul>
+
+        <h3>What does membership unlock?</h3>
+        <div class="card">
+            <p><strong>Already free:</strong> stroke input · all gestures · segment key · large-text mode · classic themes · appearance control · iCloud word sync · offline privacy.</p>
+            <p><strong>Membership unlocks:</strong> backspace-swipe clear · clipboard history (long-press space, last 30 items) · all advanced/premium themes · speed aura.</p>
+            <p><strong>Subscription-only (planned):</strong> AI typing (based on Apple Intelligence); Lifetime does not include it.</p>
+        </div>
+        <p style="color:var(--secondary);font-size:14px;">Actual prices, trial length, and expiry dates are shown in the App Store and inside the app.</p>
+
+        <h3>How do I restore purchases?</h3>
+        <p>After switching devices or reinstalling, open the main app and tap "Restore Purchases" to sync your purchased items back to the current Apple ID — no need to pay again.</p>
+
+        <h3>How do I cancel my subscription?</h3>
+        <p>On iPhone: Settings → Apple ID → Subscriptions → find "嘎嘎笔画-智能隐私输入法 / Gaga Stroke" → Cancel. You won't be charged again before the period ends, and you can resubscribe anytime.</p>
+
+        <h3>How do I request a refund?</h3>
+        <p>All payments are handled by Apple; the developer cannot issue refunds directly. To request a refund, use Apple's official channel:</p>
+        <ul>
+            <li>Visit <a href="https://reportaproblem.apple.com" target="_blank">reportaproblem.apple.com</a> and sign in with the same Apple ID.</li>
+            <li>Find the relevant order, choose "Report a Problem / Request a Refund" and follow the prompts.</li>
+            <li>Refund decisions are made by Apple and are typically processed within 1–2 weeks.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- C. 客服与反馈渠道 -->
+<section>
+    <div class="zh">
+        <h2>C. 客服与反馈渠道</h2>
+        <div class="card">
+            <h3>如何联系我们</h3>
+            <ul>
+                <li><strong>邮件：</strong>📧 <a href="mailto:lancer.yang@foxmail.com">lancer.yang@foxmail.com</a></li>
+                <li><strong>App Store 评论：</strong>也欢迎在 App Store 留下你的使用反馈与建议。</li>
+            </ul>
+            <p>本应用由独立开发者维护。我们会尽力在收到反馈后的数个工作日内回复；高峰期可能略有延迟，敬请谅解。反馈问题时，若能附上机型、iOS 版本与复现步骤，将帮助我们更快定位。</p>
+        </div>
+    </div>
+    <div class="en">
+        <h2>C. Support &amp; Feedback</h2>
+        <div class="card">
+            <h3>How to reach us</h3>
+            <ul>
+                <li><strong>Email:</strong> 📧 <a href="mailto:lancer.yang@foxmail.com">lancer.yang@foxmail.com</a></li>
+                <li><strong>App Store review:</strong> you're also welcome to leave feedback and suggestions there.</li>
+            </ul>
+            <p>This app is maintained by an independent developer. We do our best to reply within a few business days; during peak periods there may be slight delays — thank you for your understanding. When reporting an issue, including your device model, iOS version, and reproduction steps helps us pinpoint it faster.</p>
+        </div>
+    </div>
+</section>
+
+<!-- D. 故障排查 -->
+<section>
+    <div class="zh">
+        <h2>D. 故障排查</h2>
+
+        <h3>键盘不显示 / 候选为空</h3>
+        <ul>
+            <li>确认已在 <code>设置 → 通用 → 键盘 → 键盘</code> 中添加并开启「嘎嘎」。</li>
+            <li>在输入界面点击地球仪 🌐 图标，确认已切换到本键盘。</li>
+            <li>「允许完全访问」为<strong>可选</strong>，关闭状态下所有输入功能均正常。</li>
+        </ul>
+
+        <h3>为什么「无法联网 / 候选不更新」？</h3>
+        <p>这是<strong>正常现象</strong>。键盘扩展默认处于系统离线隔离状态，所有输入与候选均在本地完成；联网仅发生在你<strong>主动打开购买页面</strong>时。无需担心，也不是故障。</p>
+
+        <h3>会员 / 订阅不生效</h3>
+        <ul>
+            <li>打开主 App，点击「恢复已购项目」重新同步。</li>
+            <li>确认当前 Apple ID 与购买时一致。</li>
+            <li>尝试重启设备，或在设置中移除并重新添加键盘。</li>
+        </ul>
+
+        <h3>学习词库异常 / 候选变差</h3>
+        <p>在主 App 设置中清空学习数据即可恢复初始状态（不会删除系统内置词库）。</p>
+
+        <h3>剪贴板历史 / 进阶皮肤不可用？</h3>
+        <p>剪贴板历史与进阶 / 高级皮肤为<strong>会员功能</strong>。请确认会员状态有效；若刚购买，可用「恢复已购项目」刷新。</p>
+
+        <h3>iCloud 词同步没有生效</h3>
+        <ul>
+            <li>确认已在系统设置中登录 iCloud，且为嘎嘎开启了 iCloud 权限。</li>
+            <li>同步需要时间，且要求各设备登录同一 Apple ID。</li>
+            <li>键盘扩展不联网，同步由主 App 在联网时完成，打开一次主 App 有助于触发。</li>
+        </ul>
+
+        <h3>免费试用 / 体验被重置？</h3>
+        <p>体验起点记录在 iOS Keychain 中以防重装滥用，因此重装应用后体验计时可能重新计算。如已付费，请使用「恢复已购项目」同步会员状态。</p>
+    </div>
+    <div class="en">
+        <h2>D. Troubleshooting</h2>
+
+        <h3>The keyboard doesn't appear / candidates are empty</h3>
+        <ul>
+            <li>Make sure "嘎嘎 / Gaga" has been added and enabled under <code>Settings → General → Keyboard → Keyboards</code>.</li>
+            <li>In a text field, tap the 🌐 (globe) icon to confirm you've switched to this keyboard.</li>
+            <li>"Allow Full Access" is <strong>optional</strong>; all input features work normally with it off.</li>
+        </ul>
+
+        <h3>Why "can't connect to the network / candidates don't update"?</h3>
+        <p>This is <strong>normal</strong>. The keyboard extension is offline by default under iOS sandbox isolation; all input and candidates are processed locally. The network is only used when you <strong>proactively open the purchase page</strong>. There is nothing wrong, and no need to worry.</p>
+
+        <h3>Membership / subscription not working</h3>
+        <ul>
+            <li>Open the main app and tap "Restore Purchases" to re-sync.</li>
+            <li>Confirm the current Apple ID matches the one used for purchase.</li>
+            <li>Try restarting the device, or remove and re-add the keyboard in Settings.</li>
+        </ul>
+
+        <h3>Learning dictionary abnormal / worse candidates</h3>
+        <p>Clear the learning data in the main app's settings to return to the initial state (the built-in system dictionaries are not deleted).</p>
+
+        <h3>Clipboard history / premium themes unavailable?</h3>
+        <p>Clipboard history and advanced/premium themes are <strong>member features</strong>. Please confirm your membership is active; if you just purchased, tap "Restore Purchases" to refresh.</p>
+
+        <h3>iCloud word sync isn't working</h3>
+        <ul>
+            <li>Make sure you're signed in to iCloud in system settings and iCloud is enabled for Gaga.</li>
+            <li>Sync takes time and requires all devices to be signed in with the same Apple ID.</li>
+            <li>The keyboard extension is offline, so syncing is performed by the main app when online — opening the main app once helps trigger it.</li>
+        </ul>
+
+        <h3>Trial / experience reset after reinstall?</h3>
+        <p>The trial start time is stored in iOS Keychain to prevent abuse via reinstalling, so the trial timer may restart after reinstalling the app. If you've already paid, use "Restore Purchases" to sync your membership status.</p>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <span class="zh">© 2026 嘎嘎笔画-智能隐私输入法 · 保留所有权利 · <a href="privacy.html">隐私政策</a> · <a href="index.html">主页</a> · <a href="team.html">团队</a></span>
+    <span class="en">© 2026 Gaga Stroke. All rights reserved. · <a href="privacy.html">Privacy</a> · <a href="index.html">Home</a> · <a href="team.html">Team</a></span>
+</footer>
+
+<script>
+    document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var lang = btn.dataset.lang;
+            document.body.className = 'lang-' + lang;
+            document.querySelectorAll('.lang-switch button').forEach(function (b) {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "TZNQ2MGK6Q.com.strocle.gagastroke"
+        ],
+        "components": [
+          {
+            "/": "/event/launch",
+            "comment": "App Store 活动落地路径。必须与 App 内 AppRouter.EventLink.path 一致；未指定的 query / fragment 不做约束。"
+          }
+        ]
+      }
+    ]
+  }
+}
