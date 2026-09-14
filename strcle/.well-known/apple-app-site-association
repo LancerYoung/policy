@@ -9,7 +9,11 @@
         "components": [
           {
             "/": "/strcle/launch",
-            "comment": "嘎嘎笔画 App Store 活动落地路径。必须与 App 内 AppRouter.EventLink.path 一致；未指定的 query / fragment 不做约束。路径按 App 区分，避免多 App 撞车。"
+            "comment": "精确匹配。App Store 活动深链用这个，须与 App 内 AppRouter.EventLink.path 一致。"
+          },
+          {
+            "/": "/strcle/launch*",
+            "comment": "通配兜底：同时兼容带尾斜杠的 /strcle/launch/ 等变体（components 各条之间是 OR）。"
           }
         ]
       }
