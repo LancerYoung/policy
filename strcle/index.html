@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>嘎嘎笔画-智能隐私输入法 · 会写就会打</title>
+<meta name="description" content="嘎嘎笔画-智能隐私输入法：五笔画（横竖撇捺折）输入，会写就会打。纯离线运行、零权限、不联网、不追踪，字频学习与词组解码全部在设备本地完成。" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%23002FA7'/%3E%3Ctext x='60' y='86' font-size='72' text-anchor='middle'%3E%F0%9F%A6%86%3C/text%3E%3C/svg%3E" />
+<style>
+  :root{
+    --brand:#002FA7;        /* 克莱因蓝（品牌主色） */
+    --brand-deep:#00258A;
+    --brand-light:#0A3DD4;
+    --brand-soft:#EEF2FF;
+    --gold:#D4AF37;         /* 会员金 */
+    --gold-deep:#8A6D00;
+    --gold-soft:#FFF7CC;
+    --ink:#0B1020;
+    --muted:#5A6172;
+    --line:rgba(0,47,167,.12);
+    --bg:#FFFFFF;
+    --bg-soft:#F5F7FF;
+    --shadow:0 12px 40px rgba(0,47,167,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  a{color:var(--brand-deep);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  /* ── Nav ─────────────────────────────── */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;gap:28px;height:64px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;}
+  .brand .logo{width:32px;height:32px;border-radius:9px;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .brand:hover{text-decoration:none;}
+  nav .links{display:flex;gap:22px;margin-left:auto;}
+  nav .links a{color:var(--muted);font-size:14px;font-weight:600;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;justify-content:center;
+    background:var(--brand);color:#fff;font-weight:700;font-size:15px;
+    padding:11px 22px;border-radius:999px;text-decoration:none;
+    box-shadow:0 6px 18px rgba(0,47,167,.30);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,47,167,.38);text-decoration:none;}
+  .btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;}
+  .btn.ghost:hover{box-shadow:var(--shadow);}
+  nav .btn{padding:9px 18px;font-size:14px;}
+
+  /* ── Hero ────────────────────────────── */
+  .hero{
+    background:
+      radial-gradient(52% 45% at 85% -5%, rgba(0,47,167,.18), transparent 60%),
+      radial-gradient(45% 40% at 8% 110%, rgba(10,61,212,.12), transparent 60%),
+      linear-gradient(180deg,#FFFFFF 0%,#EDF1FF 100%);
+    padding:92px 0 80px;text-align:center;position:relative;overflow:hidden;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--brand);color:#fff;font-size:13px;font-weight:800;
+    padding:8px 18px;border-radius:999px;letter-spacing:1px;
+  }
+  .hero h1{
+    font-size:clamp(40px, 6.5vw, 68px);font-weight:900;line-height:1.08;
+    letter-spacing:-2px;margin:26px auto 0;max-width:860px;
+  }
+  .hero h1 em{font-style:normal;color:var(--brand-deep);}
+  .hero .sub{
+    font-size:clamp(17px, 2.4vw, 21px);color:var(--muted);font-weight:500;
+    margin:22px auto 0;max-width:640px;
+  }
+  .hero .cta-row{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap;}
+  .hero .cta-row .btn{font-size:17px;padding:15px 30px;}
+  .hero .trust{display:flex;gap:26px;justify-content:center;margin-top:42px;flex-wrap:wrap;}
+  .trust span{font-size:13.5px;font-weight:700;color:var(--muted);display:inline-flex;gap:7px;align-items:center;}
+  .hero-illus{margin:60px auto 0;max-width:960px;}
+  .app-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left;}
+  .shot{
+    background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;min-height:230px;
+  }
+  .shot .ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+  .shot h3{font-size:16px;font-weight:800;}
+  .shot p{font-size:13.5px;color:var(--muted);line-height:1.55;}
+
+  /* ── Section 通用 ────────────────────── */
+  section{padding:84px 0;}
+  section.soft{background:var(--bg-soft);}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 52px;}
+  .sec-head .tag{font-size:13px;font-weight:800;color:var(--brand-deep);letter-spacing:2px;text-transform:uppercase;}
+  .sec-head h2{font-size:clamp(28px,4.5vw,42px);font-weight:900;letter-spacing:-1.5px;margin-top:12px;line-height:1.12;}
+  .sec-head p{color:var(--muted);margin-top:14px;font-size:16.5px;}
+
+  /* ── Features ────────────────────────── */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .feat{
+    background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 28px;
+    transition:transform .18s,box-shadow .18s;
+  }
+  .feat:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+  .feat .ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;}
+  .feat h3{font-size:18px;font-weight:800;}
+  .feat p{font-size:14.5px;color:var(--muted);margin-top:8px;line-height:1.6;}
+
+  /* ── 五笔画演示 ──────────────────────── */
+  .strokes{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:34px auto 0;max-width:720px;}
+  .stroke{
+    width:92px;height:92px;border-radius:20px;background:#fff;border:1px solid var(--line);
+    box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  }
+  .stroke .glyph{font-size:34px;font-weight:900;color:var(--brand);line-height:1;}
+  .stroke .label{font-size:12.5px;color:var(--muted);font-weight:700;}
+
+  /* ── How it works ────────────────────── */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .step{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px 28px;}
+  .step .num{
+    width:44px;height:44px;border-radius:50%;background:var(--brand);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;
+    margin-bottom:18px;box-shadow:0 6px 16px rgba(0,47,167,.30);
+  }
+  .step h3{font-size:18px;font-weight:800;}
+  .step p{font-size:14.5px;color:var(--muted);margin-top:8px;}
+
+  /* ── Pricing ─────────────────────────── */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:960px;margin:0 auto;}
+  .plan{
+    background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px 26px;text-align:center;
+    display:flex;flex-direction:column;gap:8px;position:relative;
+  }
+  .plan.pop{border:2px solid var(--brand);box-shadow:var(--shadow);}
+  .plan .ribbon{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:12px;font-weight:800;padding:4px 14px;border-radius:999px;white-space:nowrap;}
+  .plan .name{font-size:17px;font-weight:800;}
+  .plan .cost{font-size:30px;font-weight:900;color:var(--brand-deep);letter-spacing:-1px;}
+  .plan .cost small{font-size:14px;font-weight:600;color:var(--muted);}
+  .plan ul{list-style:none;padding:0;margin:10px 0 0;text-align:left;}
+  .plan li{font-size:14px;color:var(--muted);padding:7px 0;border-top:1px solid var(--line);}
+  .plan li:first-child{border-top:none;}
+  .plan .btn{margin-top:18px;justify-content:center;}
+
+  /* ── Privacy 深色块 ──────────────────── */
+  .privacy{
+    background:linear-gradient(160deg,#001C63 0%,#00258A 55%,#0A3DD4 100%);
+    color:#fff;border-radius:28px;padding:60px 56px;position:relative;overflow:hidden;
+  }
+  .privacy::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,transparent,#9DB6FF,transparent);}
+  .privacy h2{font-size:clamp(28px,4vw,40px);font-weight:900;letter-spacing:-1px;max-width:560px;line-height:1.12;}
+  .privacy p{color:rgba(255,255,255,.85);margin-top:16px;font-size:16.5px;max-width:620px;}
+  .privacy .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:38px;}
+  .pv{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:16px;padding:20px 22px;}
+  .pv strong{display:block;font-size:15px;font-weight:800;color:#C7D5FF;}
+  .pv span{font-size:13.5px;color:rgba(255,255,255,.78);margin-top:4px;display:block;}
+
+  /* ── FAQ ─────────────────────────────── */
+  .faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  details{background:#fff;border:1px solid var(--line);border-radius:16px;padding:0;}
+  summary{
+    cursor:pointer;font-size:16px;font-weight:700;padding:20px 24px;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";font-size:22px;font-weight:400;color:var(--brand-deep);transition:transform .2s;}
+  details[open] summary::after{transform:rotate(45deg);}
+  details p{padding:0 24px 20px;color:var(--muted);font-size:14.5px;}
+
+  /* ── CTA ─────────────────────────────── */
+  .cta-final{text-align:center;}
+  .cta-final h2{font-size:clamp(28px,4.5vw,42px);font-weight:900;letter-spacing:-1.5px;}
+  .cta-final p{color:var(--muted);margin-top:14px;font-size:17px;}
+  .cta-final .btn{font-size:18px;padding:16px 34px;margin-top:30px;}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 60px;background:#EFF2FF;}
+  footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;}
+  footer .f-links{display:flex;gap:20px;font-size:13.5px;color:var(--muted);}
+  footer .f-links a{color:var(--muted);font-weight:600;}
+  footer .copy{font-size:13px;color:var(--muted);}
+
+  @media (max-width:860px){
+    .feat-grid,.steps,.price-grid,.app-shots{grid-template-columns:1fr;}
+    .privacy .grid{grid-template-columns:1fr;}
+    nav .links{display:none;}
+    section{padding:60px 0;}
+    .hero{padding:68px 0 60px;}
+    .privacy{padding:44px 26px;}
+  }
+
+  /* language toggle */
+  body.lang-zh .en { display: none; }
+  body.lang-en .zh { display: none; }
+  .lang-switch{display:inline-flex;gap:8px;}
+  .lang-switch button{font:inherit;font-size:14px;padding:6px 16px;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:980px;cursor:pointer;transition:all .15s ease;}
+  .lang-switch button.active{background:var(--brand);color:#fff;border-color:var(--brand);}
+</style>
+</head>
+<body class="lang-zh">
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#">
+      <span class="logo">🦆</span>
+      <span class="zh">嘎嘎笔画</span><span class="en">Gaga Stroke</span>
+    </a>
+    <div class="links">
+      <a href="#features"><span class="zh">功能</span><span class="en">Features</span></a>
+      <a href="#how"><span class="zh">如何使用</span><span class="en">How to use</span></a>
+      <a href="#pricing"><span class="zh">价格</span><span class="en">Pricing</span></a>
+      <a href="#faq">FAQ</a>
+      <a href="privacy.html"><span class="zh">隐私</span><span class="en">Privacy</span></a>
+    </div>
+    <div class="lang-switch">
+      <button class="active" data-lang="zh">中文</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <a class="btn" href="https://apps.apple.com/us/app/%E5%98%8E%E5%98%8E%E7%AC%94%E7%94%BB-%E6%99%BA%E8%83%BD%E9%9A%90%E7%A7%81%E9%94%AE%E7%9B%98/id6787876520" target="_blank" rel="noopener"><span class="zh">下载</span><span class="en">Get the app</span></a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">🦆 <span class="zh">简体笔画输入法 · 智能 · 隐私</span><span class="en">Simplified-stroke keyboard · smart &amp; private</span></span>
+    <h1>
+      <span class="zh">会写，就<em>会打</em>。</span>
+      <span class="en">If you can write it, <em>you can type it</em>.</span>
+    </h1>
+    <p class="sub">
+      <span class="zh">不认字？不会拼音？提笔忘字？五种基本笔画（横竖撇捺折）按书写顺序输入，不依赖读音、不需要联网。零权限、不追踪，你敲下的每个字只属于你自己。</span>
+      <span class="en">Don't know Pinyin? Forget the character? Just type the five basic strokes (horizontal, vertical, left-falling, dot, turning) in writing order — no pronunciation, no network. Zero permissions, zero tracking; every character stays yours.</span>
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="https://apps.apple.com/us/app/%E5%98%8E%E5%98%8E%E7%AC%94%E7%94%BB-%E6%99%BA%E8%83%BD%E9%9A%90%E7%A7%81%E9%94%AE%E7%9B%98/id6787876520" target="_blank" rel="noopener"><span class="zh">在 App Store 下载</span><span class="en">Download on the App Store</span></a>
+      <a class="btn ghost" href="#how"><span class="zh">看看怎么用</span><span class="en">See how it works</span></a>
+    </div>
+    <div class="trust">
+      <span>🍎 iOS 16+</span>
+      <span>🔌 纯离线</span>
+      <span>🔒 零权限 · 零追踪</span>
+      <span>🚫 无广告</span>
+    </div>
+  </div>
+
+  <!-- Hero 内嵌三卡片示意 -->
+  <div class="wrap hero-illus">
+    <div class="app-shots">
+      <div class="shot">
+        <div class="ico" style="background:#E9EDFF">✍️</div>
+        <h3><span class="zh">五笔画输入</span><span class="en">Five-stroke input</span></h3>
+        <p><span class="zh">横竖撇捺折，按书写顺序敲，会写就会打，不用背字根、不用记拼音。</span><span class="en">Horizontal, vertical, left-falling, dot, turning — type in writing order. No radicals to memorize, no Pinyin needed.</span></p>
+      </div>
+      <div class="shot">
+        <div class="ico" style="background:#FFF6D6">🔍</div>
+        <h3><span class="zh">大字模式</span><span class="en">Large-text mode</span></h3>
+        <p><span class="zh">专为长辈与视力不佳用户设计：首个候选字放大显示，看得清、点得准。</span><span class="en">Designed for elders and low-vision users: the top candidate is shown enlarged — easier to read and tap.</span></p>
+      </div>
+      <div class="shot">
+        <div class="ico" style="background:#E9EDFF">🛡️</div>
+        <h3><span class="zh">绝对隐私</span><span class="en">Absolute privacy</span></h3>
+        <p><span class="zh">键盘零网络、不追踪、不上传；无需「允许完全访问」，系统级隔离。</span><span class="en">Zero network, no tracking, no uploads. No "Allow Full Access" needed — sandbox isolation by design.</span></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ 五笔画 ═══ -->
+<section id="strokes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">Five Strokes</div>
+      <h2><span class="zh">五个键，写出所有汉字</span><span class="en">Five keys, every character</span></h2>
+      <p><span class="zh">汉字只有五种基本笔画。按顺序敲出来，剩下的交给本地引擎。</span><span class="en">Chinese characters are built from just five basic strokes. Type them in order — the on-device engine does the rest.</span></p>
+    </div>
+    <div class="strokes">
+      <div class="stroke"><span class="glyph">一</span><span class="label"><span class="zh">横</span><span class="en">Horizontal</span></span></div>
+      <div class="stroke"><span class="glyph">丨</span><span class="label"><span class="zh">竖</span><span class="en">Vertical</span></span></div>
+      <div class="stroke"><span class="glyph">丿</span><span class="label"><span class="zh">撇</span><span class="en">Left-falling</span></span></div>
+      <div class="stroke"><span class="glyph">丶</span><span class="label"><span class="zh">捺</span><span class="en">Dot</span></span></div>
+      <div class="stroke"><span class="glyph">乙</span><span class="label"><span class="zh">折</span><span class="en">Turning</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section id="features" class="soft">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">Features</div>
+      <h2><span class="zh">为不想学输入法的人而做</span><span class="en">Built for people who don't want to learn an IME</span></h2>
+      <p><span class="zh">一切都在本地完成，从第一笔到候选上屏，快且安心。</span><span class="en">Everything runs locally, from the first stroke to the candidate on screen — fast and private.</span></p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="ico" style="background:#E9EDFF">✍️</div>
+        <h3><span class="zh">笔画输入</span><span class="en">Stroke input</span></h3>
+        <p><span class="zh">五种笔画键加大字距防误触，候选栏横向滑动选字，误打也能容错。</span><span class="en">Oversized stroke keys with wide spacing to avoid mistaps; swipe the candidate bar to pick characters, with typo tolerance.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#E9EDFF">🧠</div>
+        <h3><span class="zh">词格引擎 · 整句出词</span><span class="en">Lattice engine · whole words</span></h3>
+        <p><span class="zh">多段输入经词格解码与逐字语言模型排序，长词、词组联想更准更顺。</span><span class="en">Multi-segment input is decoded through a word lattice and character-level language model — longer, smarter, smoother phrases.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#FFF6D6">🔍</div>
+        <h3><span class="zh">大字模式</span><span class="en">Large-text mode</span></h3>
+        <p><span class="zh">开启后首个候选字以大字号显示在左上角，问号等不常用键隐藏，拨给候选更大空间。</span><span class="en">Shows the top candidate at a larger size in the top-left and hides less-used keys, giving candidates more room.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#E9EDFF">🎨</div>
+        <h3><span class="zh">键盘外观自定义</span><span class="en">Full appearance control</span></h3>
+        <p><span class="zh">字母 / 数字 / 功能键的字号、字重、圆角、字体，主 App 设置里随手调。</span><span class="en">Tune font size, weight, corner radius, and typeface for letter, number, and function keys right in the app.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#FFF6D6">🌈</div>
+        <h3><span class="zh">多彩皮肤</span><span class="en">Colourful themes</span></h3>
+        <p><span class="zh">经典免费，彩虹渐变、霓虹、赛博、星夜、奶黄、Q弹等进阶 / 高级皮肤随时切换。</span><span class="en">Classic themes are free; Rainbow, Neon, Cyber, Starry, Cream, Bouncy and more unlock with membership.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#E9EDFF">☁️</div>
+        <h3><span class="zh">iCloud 用户词同步</span><span class="en">iCloud word sync</span></h3>
+        <p><span class="zh">常打的字词同步到你自己的 iCloud，换机登录同账号即找回，免费可用。</span><span class="en">Sync the words you use most to your own iCloud; sign in on a new device and they're back — free.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#E9EDFF">👆</div>
+        <h3><span class="zh">上滑输入</span><span class="en">Swipe-up input</span></h3>
+        <p><span class="zh">标点键上滑弹出符号面板，表情键上滑弹出常用 emoji，手指不离开键盘。</span><span class="en">Swipe up on the punctuation key for symbols, or the emoji key for common emojis — without leaving the keyboard.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#FFF6D6">📋</div>
+        <h3><span class="zh">剪贴板历史<span style="color:var(--gold-deep);font-size:12px;font-weight:800;"> · 会员</span></span><span class="en">Clipboard history <span style="color:var(--gold-deep);font-size:12px;font-weight:800;">· Member</span></span></h3>
+        <p><span class="zh">长按空格呼出，回看最近 30 条复制内容，点一下就上屏。</span><span class="en">Long-press the space bar to recall the last 30 copied items and tap to insert.</span></p>
+      </div>
+      <div class="feat">
+        <div class="ico" style="background:#E9EDFF">⚡️</div>
+        <h3><span class="zh">打字加速彩蛋<span style="color:var(--gold-deep);font-size:12px;font-weight:800;"> · 会员</span></span><span class="en">Speed aura <span style="color:var(--gold-deep);font-size:12px;font-weight:800;">· Member</span></span></h3>
+        <p><span class="zh">打得飞快时，键盘缝隙透出流动光晕，越打越炫。</span><span class="en">Type fast and a flowing glow threads through the gaps between keys.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">How to use</div>
+      <h2><span class="zh">三步，开始打字</span><span class="en">Three steps to start typing</span></h2>
+      <p><span class="zh">无需账号、无需授权，打开就能用。</span><span class="en">No account, no permission prompts — open and type.</span></p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3><span class="zh">添加键盘</span><span class="en">Add the keyboard</span></h3>
+        <p><span class="zh">设置 → 通用 → 键盘 → 键盘 → 添加新键盘，选择「嘎嘎」。</span><span class="en">Settings → General → Keyboard → Keyboards → Add New Keyboard, then choose "Gaga".</span></p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3><span class="zh">切换输入</span><span class="en">Switch &amp; type</span></h3>
+        <p><span class="zh">在任意输入框点地球仪 🌐 图标切到本键盘，按笔画直接开打。</span><span class="en">Tap the 🌐 (globe) in any text field to switch, then type strokes directly.</span></p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3><span class="zh">安心使用</span><span class="en">Type with peace</span></h3>
+        <p><span class="zh">保持「允许完全访问」关闭即可，所有功能照常工作，输入从不出设备。</span><span class="en">Keep "Allow Full Access" off — every feature still works, and your input never leaves the device.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing" class="soft">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">Pricing</div>
+      <h2><span class="zh">基础功能完全免费</span><span class="en">Core typing is free, always</span></h2>
+      <p><span class="zh">核心笔画输入永久免费；买断解锁全部增强，订阅可享后续新功能。</span><span class="en">Core stroke input is free forever; Lifetime unlocks every enhancement; subscription includes future features.</span></p>
+    </div>
+    <div class="price-grid">
+      <div class="plan">
+        <div class="name"><span class="zh">免费版</span><span class="en">Free</span></div>
+        <div class="cost">¥0</div>
+        <ul>
+          <li><span class="zh">笔画输入 · 退格 · 空格 · 标点 · 数字 · 符号 · 表情</span><span class="en">Stroke input · delete · space · punctuation · digits · symbols · emoji</span></li>
+          <li><span class="zh">词格整句解码与词组联想</span><span class="en">Lattice decoding &amp; phrase prediction</span></li>
+          <li><span class="zh">分词键 · 全部手势 · 大字模式</span><span class="en">Segment key · all gestures · large-text mode</span></li>
+          <li><span class="zh">经典皮肤 · 键盘外观自定义</span><span class="en">Classic themes · appearance control</span></li>
+          <li><span class="zh">iCloud 用户词同步</span><span class="en">iCloud word sync</span></li>
+        </ul>
+        <a class="btn ghost" href="https://apps.apple.com/us/app/%E5%98%8E%E5%98%8E%E7%AC%94%E7%94%BB-%E6%99%BA%E8%83%BD%E9%9A%90%E7%A7%81%E9%94%AE%E7%9B%98/id6787876520" target="_blank" rel="noopener"><span class="zh">下载使用</span><span class="en">Download</span></a>
+      </div>
+      <div class="plan pop">
+        <div class="ribbon"><span class="zh">推荐 · 5 天免费体验</span><span class="en">Best value · 5-day trial</span></div>
+        <div class="name"><span class="zh">年订阅</span><span class="en">Yearly</span></div>
+        <div class="cost"><span class="zh">按年 <small>平均每天约 ¥0.16</small></span><span class="en">Yearly <small>≈ ¥0.16/day</small></span></div>
+        <ul>
+          <li><span class="zh">现有功能 + 后续新功能免费享</span><span class="en">All current features + future ones included</span></li>
+          <li><span class="zh">全部进阶 / 高级皮肤</span><span class="en">All advanced &amp; premium themes</span></li>
+          <li><span class="zh">退格左滑清空 · 剪贴板历史</span><span class="en">Backspace-swipe clear · clipboard history</span></li>
+          <li><span class="zh">打字加速彩蛋 · AI 预测打字（规划中）</span><span class="en">Speed aura · AI typing (planned)</span></li>
+          <li><span class="zh">随时可在系统设置中取消</span><span class="en">Cancel anytime in Settings</span></li>
+        </ul>
+        <a class="btn" href="https://apps.apple.com/us/app/%E5%98%8E%E5%98%8E%E7%AC%94%E7%94%BB-%E6%99%BA%E8%83%BD%E9%9A%90%E7%A7%81%E9%94%AE%E7%9B%98/id6787876520" target="_blank" rel="noopener"><span class="zh">内购订阅</span><span class="en">Subscribe in app</span></a>
+      </div>
+      <div class="plan">
+        <div class="name"><span class="zh">永久买断</span><span class="en">Lifetime</span></div>
+        <div class="cost"><span class="zh">一次购买 <small>永久使用</small></span><span class="en">One-time <small>forever</small></span></div>
+        <ul>
+          <li><span class="zh">一次购买永久用</span><span class="en">Buy once, use forever</span></li>
+          <li><span class="zh">全部进阶 / 高级皮肤</span><span class="en">All advanced &amp; premium themes</span></li>
+          <li><span class="zh">退格左滑清空 · 剪贴板历史</span><span class="en">Backspace-swipe clear · clipboard history</span></li>
+          <li><span class="zh">后续新功能可能需额外付费</span><span class="en">Some future features may cost extra</span></li>
+        </ul>
+        <a class="btn ghost" href="https://apps.apple.com/us/app/%E5%98%8E%E5%98%8E%E7%AC%94%E7%94%BB-%E6%99%BA%E8%83%BD%E9%9A%90%E7%A7%81%E9%94%AE%E7%9B%98/id6787876520" target="_blank" rel="noopener"><span class="zh">内购买断</span><span class="en">Buy in app</span></a>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:18px;"><span class="zh">月订阅亦可随时开通。具体价格与试用时长以 App Store 实际展示为准。</span><span class="en">A monthly plan is also available. Actual prices and trial length are shown in the App Store.</span></p>
+  </div>
+</section>
+
+<!-- ═══ PRIVACY ═══ -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="privacy">
+      <h2><span class="zh">你的笔画，只属于你。</span><span class="en">Your strokes belong to you alone.</span></h2>
+      <p><span class="zh">我们按自己想要的方式打造嘎嘎：本地引擎、离线运行、零追踪。你打的字，连我们都不曾看见。</span><span class="en">We built Gaga the way we'd want it: a local engine, offline by design, zero tracking. We never even see what you type.</span></p>
+      <div class="grid">
+        <div class="pv"><strong>🔒 本地引擎</strong><span><span class="zh">自研笔画引擎与词格语言模型全部在设备内运行。</span><span class="en">The self-built stroke engine and lattice language model run entirely on-device.</span></span></div>
+        <div class="pv"><strong>🚫 零网络</strong><span><span class="zh">键盘扩展默认离线，系统沙箱隔离，无法联网。</span><span class="en">The keyboard is offline by default under iOS sandbox isolation.</span></span></div>
+        <div class="pv"><strong>🛡️ 零权限</strong><span><span class="zh">不请求任何权限，所有功能无需「完全访问」。</span><span class="en">No permissions requested; every feature works without "Full Access".</span></span></div>
+        <div class="pv"><strong>📊 无追踪</strong><span><span class="zh">不使用任何分析、广告或第三方追踪 SDK。</span><span class="en">No analytics, ad, or third-party tracking SDK of any kind.</span></span></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;">
+      <a class="btn ghost" href="privacy.html"><span class="zh">阅读完整隐私政策</span><span class="en">Read the full Privacy Policy</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq" class="soft">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tag">FAQ</div>
+      <h2><span class="zh">常见问题</span><span class="en">Questions, answered</span></h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary><span class="zh">不会拼音、不认字，能用吗？</span><span class="en">I don't know Pinyin. Can I use it?</span></summary>
+        <p><span class="zh">可以。嘎嘎按汉字的书写顺序输入五种基本笔画（横竖撇捺折），完全不依赖读音。会写这个字，就能把它打出来。</span><span class="en">Yes. Gaga takes the five basic strokes (horizontal, vertical, left-falling, dot, turning) in writing order and doesn't rely on pronunciation at all. If you can write the character, you can type it.</span></p>
+      </details>
+      <details>
+        <summary><span class="zh">需要开启「允许完全访问」吗？</span><span class="en">Do I need to enable "Allow Full Access"?</span></summary>
+        <p><span class="zh">不需要，也不需要任何权限。嘎嘎所有功能（笔画输入、词格整句、皮肤、大字模式、触感、iCloud 词同步）在关闭完全访问的状态下都正常工作。键盘扩展默认处于系统离线隔离，无法联网。</span><span class="en">No — and no permissions at all are needed. Every feature (stroke input, lattice input, themes, large-text mode, haptics, iCloud sync) works with Full Access disabled. The keyboard is offline by default under iOS sandbox isolation.</span></p>
+      </details>
+      <details>
+        <summary><span class="zh">我的输入数据去哪了？</span><span class="en">Where does my input data go?</span></summary>
+        <p><span class="zh">哪里都不去。键盘不收集、不追踪、不上传任何输入内容。字频学习仅保存在本机 App Group 容器内，用于个性化候选排序，不会离开你的设备，也不与任何第三方共享。</span><span class="en">Nowhere. The keyboard collects, tracks, and uploads nothing. Word-frequency learning stays only in the on-device App Group container for personalized ranking — it never leaves your device and is shared with no third party.</span></p>
+      </details>
+      <details>
+        <summary><span class="zh">大字模式是什么？</span><span class="en">What is large-text mode?</span></summary>
+        <p><span class="zh">专为长辈与视力不佳的用户设计。开启后第一个候选字会以大字号显示在键盘左上角，看得清、点得准；问号等不常用键会隐藏，把空间让给候选。免费可用。</span><span class="en">Designed for elders and low-vision users. When enabled, the top candidate appears large in the top-left of the keyboard — easier to read and tap; less-used keys such as "?" are hidden to give candidates more room. Free to use.</span></p>
+      </details>
+      <details>
+        <summary><span class="zh">如何恢复购买 / 申请退款？</span><span class="en">How do I restore or refund a purchase?</span></summary>
+        <p><span class="zh">更换设备或重装后，打开主 App 点击「恢复已购项目」即可同步。所有支付由 Apple 处理，退款请通过 reportaproblem.apple.com 申请，开发者无法直接退款。</span><span class="en">After switching devices or reinstalling, open the main app and tap "Restore Purchases". All payments are handled by Apple; request refunds via reportaproblem.apple.com — the developer cannot refund directly.</span></p>
+      </details>
+      <details>
+        <summary><span class="zh">免费版能用什么？</span><span class="en">What can the free version do?</span></summary>
+        <p><span class="zh">笔画输入、分词键、全部手势、大字模式、经典皮肤、键盘外观自定义、iCloud 用户词同步、词格整句解码均免费可用；退格左滑清空、剪贴板历史与进阶 / 高级皮肤需会员解锁。</span><span class="en">Stroke input, the segment key, all gestures, large-text mode, classic themes, appearance control, iCloud word sync, and lattice decoding are all free. Backspace-swipe clear, clipboard history, and advanced/premium themes require membership.</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section id="download" style="padding-top:60px;padding-bottom:80px;">
+  <div class="wrap cta-final">
+    <h2><span class="zh">把安心，装进键盘里。</span><span class="en">Put peace of mind in your keyboard.</span></h2>
+    <p><span class="zh">五笔画输入，会写就会打。今天就开始用。</span><span class="en">Five-stroke typing — if you can write it, you can type it. Start today.</span></p>
+    <a class="btn" href="https://apps.apple.com/us/app/%E5%98%8E%E5%98%8E%E7%AC%94%E7%94%BB-%E6%99%BA%E8%83%BD%E9%9A%90%E7%A7%81%E9%94%AE%E7%9B%98/id6787876520" target="_blank" rel="noopener"><span class="zh">在 App Store 下载</span><span class="en">Download on the App Store</span></a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#" style="font-size:16px;">
+      <span class="logo" style="width:24px;height:24px;font-size:15px;border-radius:7px;">🦆</span>
+      <span class="zh">嘎嘎笔画</span><span class="en">Gaga Stroke</span>
+    </a>
+    <div class="f-links">
+      <a href="privacy.html"><span class="zh">隐私政策</span><span class="en">Privacy Policy</span></a>
+      <a href="support.html"><span class="zh">技术支持</span><span class="en">Support</span></a>
+      <a href="team.html"><span class="zh">团队</span><span class="en">Team</span></a>
+      <a href="mailto:lancer.yang@foxmail.com">Email</a>
+    </div>
+    <div class="copy">© 2026 嘎嘎笔画-智能隐私输入法</div>
+  </div>
+</footer>
+
+<script>
+    document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var lang = btn.dataset.lang;
+            document.body.className = 'lang-' + lang;
+            document.querySelectorAll('.lang-switch button').forEach(function (b) {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>
