@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>支持 — HotSeat</title>
+<meta name="description" content="HotSeat 使用支持：常见问题、购买恢复、联系开发者。">
+<style>
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --border:rgba(20,30,70,.10);
+  --ink:#12141c; --secondary:#5a5f74; --accent:#b85c2a; --max-w:760px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--ink);line-height:1.75;background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+header{border-bottom:1px solid var(--border);background:var(--card)}
+header .wrap{max-width:var(--max-w);margin:0 auto;padding:22px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header .name{font-size:22px;font-weight:700;letter-spacing:-0.01em}
+header .sub{font-size:14px;color:var(--secondary)}
+.lang-switch{margin-left:auto;display:flex;gap:8px}
+.lang-switch button{padding:6px 18px;border:1px solid var(--border);background:var(--bg);color:var(--secondary);
+  border-radius:980px;cursor:pointer;font-size:14px;font-family:inherit;transition:all .15s ease}
+.lang-switch button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+main{max-width:var(--max-w);margin:0 auto;padding:32px 24px 64px}
+section{margin-bottom:30px}
+h2{font-size:21px;font-weight:600;margin-bottom:10px;letter-spacing:-0.01em}
+h3{font-size:17px;font-weight:600;margin:18px 0 6px}
+p,li{font-size:16px;color:#333}
+p+p{margin-top:10px}
+ul{padding-left:20px;margin:8px 0}
+li{margin-bottom:6px}
+details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:12px}
+summary{cursor:pointer;font-weight:600;font-size:16px;outline:none}
+details p{margin-top:10px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin:16px 0}
+.no{display:none}
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--secondary);font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div>
+      <div class="name">HotSeat - roast &amp; toast</div>
+      <div class="sub" data-zh="支持" data-en="Support">支持</div>
+    </div>
+    <div class="lang-switch">
+      <button class="active" data-lang="zh">中文</button>
+      <button data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ZH ===== -->
+<div class="lang-zh">
+  <section>
+    <p>遇到问题、有个好点子，或者就想吐槽哪一桌太难混——下面先看常见问题，没有答案就直接联系我们。</p>
+  </section>
+
+  <section>
+    <h2>常见问题</h2>
+
+    <details>
+      <summary>App 需要联网才能玩吗？</summary>
+      <p>不需要。剧本文本全部内置在 App 里，飞行模式下也能完整玩一局。联网只用于获取后续新增的剧本文档。</p>
+    </details>
+
+    <details>
+      <summary>为什么有些角色的台词感觉像在「现编」？</summary>
+      <p>因为它确实是现场生成的。每句台词在说出来之前，会由 Apple 的设备端模型按照说话人的性格、当下情绪以及他对你的态度重新润色一遍。模型不可用时，会直接播放作者写好的原文。</p>
+    </details>
+
+    <details>
+      <summary>界面语言怎么切换？</summary>
+      <p>进入「设置 → 语言」，可以选择跟随系统，也可以手动指定一种界面语言。切换后立即生效，不需要重启。</p>
+    </details>
+
+    <details>
+      <summary>「他们会记仇」是什么意思？</summary>
+      <p>你在一局里留下的糗事会写进角色的档案，下一局开局时可能有人当场替你复述一遍。这个能力属于完整版的一部分。</p>
+    </details>
+
+    <details>
+      <summary>历史记录里的对话能导出吗？</summary>
+      <p>暂时还不能导出。你可以在 App 内随时翻阅每一局的完整对话记录和数据。</p>
+    </details>
+
+    <details>
+      <summary>怎么恢复我的买断？</summary>
+      <p>在 App 的「设置 → 解锁完整版」页面底部点「恢复购买」，系统会通过你的 App Store 账户验证。也可以直接在 App Store 账户的「购买记录」里确认。</p>
+    </details>
+
+    <details>
+      <summary>会收集我的聊天内容吗？</summary>
+      <p>不会。所有生成和判定都在你的设备上完成，我们没有服务器接收这些内容。详见<a href="privacy.html">隐私政策</a>。</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>联系我们</h2>
+    <p>请把问题发邮件到 <a href="mailto:yang-nigoolasi@foxmail.com">yang-nigoolasi@foxmail.com</a>，邮件里带上这几点会快很多：</p>
+    <ul>
+      <li>设备型号与 iOS 版本</li>
+      <li>App 版本（在「设置」页面底部可以看到）</li>
+      <li>问题出现在哪个页面、大致在第几步</li>
+      <li>如果方便，附一张截图</li>
+    </ul>
+    <div class="card">
+      <p>我们会尽量在几个工作日内回复。如果这个 Bug 最后被我们修掉了，你会在更新说明里看到。</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===== EN ===== -->
+<div class="lang-en no">
+  <section>
+    <p>Something broken, an idea worth stealing, or one table you swear is rigged — check the questions below first, and if that doesn&rsquo;t sort it, write to us.</p>
+  </section>
+
+  <section>
+    <h2>Frequently asked</h2>
+
+    <details>
+      <summary>Do I need an internet connection to play?</summary>
+      <p>No. Every scenario ships inside the app, so a full round plays fine in Airplane mode. A connection is only used to fetch scenarios released after your version.</p>
+    </details>
+
+    <details>
+      <summary>Why do some lines sound improvised?</summary>
+      <p>Because they are. Right before a character speaks, the line is rephrased by Apple&rsquo;s on-device model to match who is talking, their mood right now, and how much they currently like you. If the model isn&rsquo;t available, the author&rsquo;s original line is used instead.</p>
+    </details>
+
+    <details>
+      <summary>How do I change the interface language?</summary>
+      <p>Go to Settings → Language and either follow the system or pick one by hand. It applies immediately, no restart needed.</p>
+    </details>
+
+    <details>
+      <summary>What does “they hold grudges” mean?</summary>
+      <p>Your worst moments get filed away. Start a later round and someone may quote you back word for word. It&rsquo;s part of the full version.</p>
+    </details>
+
+    <details>
+      <summary>Can I export my transcripts?</summary>
+      <p>Not yet. You can read the complete transcript and stats of any past round inside the app.</p>
+    </details>
+
+    <details>
+      <summary>How do I restore my unlock?</summary>
+      <p>Tap “Restore Purchases” at the bottom of Settings → Unlock Full Version; verification runs against your App Store account. You can also confirm it in your App Store purchase history.</p>
+    </details>
+
+    <details>
+      <summary>Do you read my conversations?</summary>
+      <p>No. Generation and scoring all happen on your device, and nothing is sent to a server of ours. See the <a href="privacy.html">privacy policy</a>.</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>Contact us</h2>
+    <p>Email <a href="mailto:yang-nigoolasi@foxmail.com">yang-nigoolasi@foxmail.com</a>. These four things make it much faster:</p>
+    <ul>
+      <li>Device model and iOS version</li>
+      <li>App version (bottom of the Settings page)</li>
+      <li>Which screen it happened on, and roughly when</li>
+      <li>A screenshot, if you can</li>
+    </ul>
+    <div class="card">
+      <p>We aim to reply within a few working days. If your bug actually gets fixed, you&rsquo;ll see it in the release notes.</p>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer><a href="privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a> · HotSeat - roast &amp; toast</footer>
+
+<script>
+var btns = document.querySelectorAll('.lang-switch button');
+btns.forEach(function (b) {
+  b.addEventListener('click', function () {
+    var lang = b.dataset.lang;
+    btns.forEach(function (x) { x.classList.remove('active'); });
+    b.classList.add('active');
+    document.querySelector('.lang-zh').classList.toggle('no', lang !== 'zh');
+    document.querySelector('.lang-en').classList.toggle('no', lang !== 'en');
+    document.querySelectorAll('[data-zh][data-en]').forEach(function (el) {
+      el.textContent = el.dataset[lang];
+    });
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+    if (history.replaceState) history.replaceState(null, '', '?lang=' + lang);
+  });
+});
+(function () {
+  var m = location.search.match(/lang=(zh|en)/);
+  if (m && m[1] === 'en') document.querySelector('[data-lang="en"]').click();
+})();
+</script>
+</body>
+</html>

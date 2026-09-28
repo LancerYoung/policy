@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐私保护政策 — HotSeat</title>
+<meta name="description" content="HotSeat 隐私保护政策：不收集任何个人数据，对话生成在设备本地完成，无账号、无追踪、无广告。">
+<style>
+:root{
+  --bg:#f6f7fb; --card:#ffffff; --border:rgba(20,30,70,.10);
+  --ink:#12141c; --secondary:#5a5f74; --accent:#b85c2a; --max-w:760px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--ink);line-height:1.75;background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+header{border-bottom:1px solid var(--border);background:var(--card)}
+header .wrap{max-width:var(--max-w);margin:0 auto;padding:22px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header .name{font-size:22px;font-weight:700;letter-spacing:-0.01em}
+header .sub{font-size:14px;color:var(--secondary)}
+.lang-switch{margin-left:auto;display:flex;gap:8px}
+.lang-switch button{padding:6px 18px;border:1px solid var(--border);background:var(--bg);color:var(--secondary);
+  border-radius:980px;cursor:pointer;font-size:14px;font-family:inherit;transition:all .15s ease}
+.lang-switch button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+main{max-width:var(--max-w);margin:0 auto;padding:32px 24px 64px}
+section{margin-bottom:34px}
+h2{font-size:21px;font-weight:600;margin-bottom:10px;letter-spacing:-0.01em}
+p,li{font-size:16px;color:#333}
+p+p{margin-top:10px}
+ul{padding-left:20px;margin:8px 0}
+li{margin-bottom:6px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin:16px 0}
+.updated{font-size:14px;color:var(--secondary);margin-bottom:4px}
+.no{display:none}
+footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--secondary);font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div>
+      <div class="name">HotSeat - roast &amp; toast</div>
+      <div class="sub" data-zh="隐私保护政策" data-en="Privacy Policy">隐私保护政策</div>
+    </div>
+    <div class="lang-switch">
+      <button class="active" data-lang="zh">中文</button>
+      <button data-lang="en">English</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== ZH ===== -->
+<div class="lang-zh">
+  <section>
+    <p class="updated">最近更新：2026 年 9 月 28 日</p>
+    <p>HotSeat 是一款单机的对话游戏。我们把话说在前面：<strong>我们不收集你的任何数据</strong>——不需要注册账号，不需要登录，不需要联网远程存的任何东西。</p>
+  </section>
+
+  <section>
+    <h2>一、我们不收集什么</h2>
+    <p>答案很简单：<strong>什么都不收集。</strong></p>
+    <ul>
+      <li>没有账号系统，不需要注册、登录或邮箱；</li>
+      <li>不读取你的通讯录、照片、麦克风、相机、定位、日历或健康数据；</li>
+      <li>App 不申请上述任何系统权限；</li>
+      <li>不含任何统计、广告、归因或行为追踪 SDK；</li>
+      <li>不使用 IDFA，也不会跨域追踪你。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>二、游戏数据存在哪里</h2>
+    <p>你的每一局游戏、人物图鉴进度、历史对话记录、设置项（比如是否开启背景音乐、选择了哪种界面语言），<strong>全部只保存在你这台设备的本地存储里</strong>。我们没有服务器用来存你的游戏数据，也没有办法读到它。</p>
+    <p>删除 App 即清除全部本地数据。</p>
+  </section>
+
+  <section>
+    <h2>三、AI 台词是怎么生成的</h2>
+    <p>角色台词由 Apple 提供的<strong>设备端模型</strong>（Apple Intelligence）在你的手机上即时生成与润色，<strong>不经过我们的服务器</strong>。你的作答和对话内容不会被上传到任何地方用于训练或分析。</p>
+    <p>当设备端模型不可用时，App 会直接播放预先写好的剧本文本，游戏体验不受影响。</p>
+  </section>
+
+  <section>
+    <h2>四、唯一的联网行为</h2>
+    <p>App 启动时可能向公共 CDN 请求一份「剧本目录」配置文件，以及在你需要某份新增剧本时下载对应的加密内容文件，用于更新本地剧本库。</p>
+    <div class="card">
+      <p>这些请求是匿名的：请求中<strong>不包含账号、设备标识、IDFA 或任何身份信息</strong>，服务端也不会据此识别你。下载失败时 App 会静默使用本地已内置的剧本，不影响启动和游戏。</p>
+    </div>
+    <p>除此之外，App 不产生任何其它网络请求。</p>
+  </section>
+
+  <section>
+    <h2>五、购买</h2>
+    <p>App 内的一次性买断由 Apple 的 StoreKit 完成。整个支付流程由 Apple 处理，<strong>我们看不到也无法保存你的付款信息或身份信息</strong>。你可以在 App Store 的购买记录里管理或恢复已购项目。</p>
+  </section>
+
+  <section>
+    <h2>六、儿童</h2>
+    <p>HotSeat 并非面向 13 岁以下儿童的产品，我们也不会有意收集儿童的个人信息。</p>
+  </section>
+
+  <section>
+    <h2>七、政策变更</h2>
+    <p>如果将来我们的数据处理方式有变化，会先更新本页内容，并确保你随时可以在这里看到当前生效的版本。</p>
+  </section>
+
+  <section>
+    <h2>八、联系我们</h2>
+    <p>关于隐私的任何问题，请通过<a href="support.html">支持页面</a>上的方式联系我们。</p>
+  </section>
+</div>
+
+<!-- ===== EN ===== -->
+<div class="lang-en no">
+  <section>
+    <p class="updated">Last updated: September 28, 2026</p>
+    <p>HotSeat is an offline conversation game. Let&rsquo;s put the short version first: <strong>we collect nothing about you.</strong> No account, no sign-in, no profile anywhere else.</p>
+  </section>
+
+  <section>
+    <h2>1. What we collect</h2>
+    <p>The honest answer: <strong>nothing.</strong></p>
+    <ul>
+      <li>No accounts, no registration, no email required;</li>
+      <li>No access to your contacts, photos, microphone, camera, location, calendar or health data;</li>
+      <li>The app requests none of those system permissions;</li>
+      <li>No analytics, advertising, attribution or behavioural tracking SDKs;</li>
+      <li>No IDFA and no cross-app tracking.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. Where your game data lives</h2>
+    <p>Every round you play, your Character Codex progress, full conversation history and settings (background music, interface language) are <strong>stored only in local storage on your own device</strong>. We run no server that holds your game data, and we have no way to read it.</p>
+    <p>Deleting the app removes all local data.</p>
+  </section>
+
+  <section>
+    <h2>3. How dialogue is generated</h2>
+    <p>Character lines are generated and rephrased on the spot by Apple&rsquo;s <strong>on-device model</strong> (Apple Intelligence), running on your phone. They never pass through our servers. Your answers and the conversation are not uploaded anywhere for training or analysis.</p>
+    <p>When the on-device model is unavailable, the app plays the pre-written script text instead. Nothing breaks.</p>
+  </section>
+
+  <section>
+    <h2>4. The one network request we make</h2>
+    <p>On launch, the app may request a small content catalogue from a public CDN, and download an encrypted file when you open a newly released scenario — that is how we ship new material to your local library.</p>
+    <div class="card">
+      <p>These requests are anonymous: they contain <strong>no account identifier, device identifier, IDFA or any personal information</strong>, and nothing in them can be used to single you out. If a download fails, the app quietly falls back to the scenarios already built in.</p>
+    </div>
+    <p>Outside of that, the app makes no other network requests.</p>
+  </section>
+
+  <section>
+    <h2>5. Purchases</h2>
+    <p>The optional one-time unlock is processed by Apple&rsquo;s StoreKit. Payment is handled entirely by Apple — <strong>we never see or store your payment or identity details</strong>. Manage or restore your purchase from your App Store account.</p>
+  </section>
+
+  <section>
+    <h2>6. Children</h2>
+    <p>HotSeat is not directed at children under 13, and we do not knowingly collect personal information from children.</p>
+  </section>
+
+  <section>
+    <h2>7. Changes to this policy</h2>
+    <p>If our practices ever change, this page changes first. The version published here is always the one in effect.</p>
+  </section>
+
+  <section>
+    <h2>8. Contact</h2>
+    <p>Any question about privacy: reach us through the <a href="support.html">support page</a>.</p>
+  </section>
+</div>
+
+</main>
+
+<footer>HotSeat - roast &amp; toast</footer>
+
+<script>
+var btns = document.querySelectorAll('.lang-switch button');
+btns.forEach(function (b) {
+  b.addEventListener('click', function () {
+    var lang = b.dataset.lang;
+    btns.forEach(function (x) { x.classList.remove('active'); });
+    b.classList.add('active');
+    document.querySelector('.lang-zh').classList.toggle('no', lang !== 'zh');
+    document.querySelector('.lang-en').classList.toggle('no', lang !== 'en');
+    document.querySelectorAll('[data-zh][data-en]').forEach(function (el) {
+      el.textContent = el.dataset[lang];
+    });
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+    if (history.replaceState) history.replaceState(null, '', '?lang=' + lang);
+  });
+});
+(function () {
+  var m = location.search.match(/lang=(zh|en)/);
+  if (m && m[1] === 'en') document.querySelector('[data-lang="en"]').click();
+})();
+</script>
+</body>
+</html>
