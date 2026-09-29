@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HotSeat — 这桌话，接得住吗？</title>
+<meta name="description" content="HotSeat 是一场只属于你的饭局对话游戏：四位性格迥异的角色坐在你对面，你的每一句话他们都会记住。完全单机，台词由设备端模型实时润色。">
+<meta property="og:title" content="HotSeat — roast & toast">
+<meta property="og:description" content="这桌话，接得住吗？单机饭局对话游戏，他们会记仇。">
+<style>
+:root{
+  --bg:#150e07;
+  --bg2:#1d140c;
+  --card:#241910;
+  --card2:#2c2013;
+  --border:rgba(255,190,120,.14);
+  --border-hi:rgba(255,190,120,.38);
+  --ink:#f6ecdb;
+  --secondary:#b5a28b;
+  --muted:#8a7a66;
+  --accent:#e8833a;
+  --accent2:#ffb45e;
+  --max-w:1120px;
+  --c-zhou:#f0913f;
+  --c-vicky:#e2543f;
+  --c-chen:#a98d5f;
+  --c-xiaoli:#e3b23c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--ink);line-height:1.75;background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--accent2);text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+
+/* grain */
+body::after{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ===== header ===== */
+header{position:sticky;top:0;z-index:50;background:rgba(21,14,7,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+header .wrap{display:flex;align-items:center;gap:14px;padding:15px 24px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.01em;color:var(--ink)}
+.logo .flame{width:31px;height:31px;border-radius:9px;background:linear-gradient(140deg,#f2a04b,#c34d1a);display:grid;place-items:center;font-size:16px;box-shadow:0 4px 14px rgba(232,131,58,.35)}
+nav{margin-left:auto;display:flex;align-items:center;gap:24px}
+nav a.link{color:var(--secondary);font-size:15px;transition:color .15s}
+nav a.link:hover{color:var(--ink)}
+.lang-switch{display:flex;gap:5px;margin-left:6px;padding:3px;border:1px solid var(--border);border-radius:980px}
+.lang-switch button{padding:4px 14px;border:none;background:transparent;color:var(--secondary);
+  border-radius:980px;cursor:pointer;font-size:13px;font-family:inherit;transition:all .15s}
+.lang-switch button.active{background:var(--accent);color:#1b1006;font-weight:600}
+@media(max-width:760px){nav a.link{display:none}}
+
+/* ===== hero ===== */
+.hero{position:relative;padding:88px 0 72px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-30% -20% auto;height:130%;pointer-events:none;
+  background:radial-gradient(ellipse 52% 46% at 66% 24%,rgba(232,131,58,.17),transparent 70%),
+             radial-gradient(ellipse 40% 40% at 12% 70%,rgba(190,90,30,.08),transparent 70%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center}
+@media(max-width:920px){.hero .wrap{grid-template-columns:1fr;gap:48px}.hero{padding-top:56px}}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid var(--border);
+  background:rgba(232,131,58,.08);border-radius:980px;font-size:13.5px;color:var(--accent2);margin-bottom:24px}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+h1{font-size:clamp(40px,5.8vw,62px);font-weight:900;line-height:1.16;letter-spacing:-.02em;margin-bottom:22px}
+h1 em{font-style:normal;background:linear-gradient(100deg,#ffc87a,#e8642a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:17.5px;color:var(--secondary);max-width:32em;margin-bottom:34px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:15px;font-size:16px;font-weight:700;
+  transition:transform .18s,box-shadow .18s,background .18s}
+.btn-primary{background:linear-gradient(120deg,#f59a45,#d1551d);color:#1b0f05;box-shadow:0 10px 30px rgba(232,131,58,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(232,131,58,.5)}
+.btn-ghost{border:1px solid var(--border);color:var(--ink);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:var(--border-hi)}
+.hero-note{margin-top:20px;font-size:13.5px;color:var(--muted)}
+
+/* hero table composition */
+.table-scene{position:relative;aspect-ratio:1/1;max-width:490px;margin:0 auto;width:100%}
+.table-scene .glow{position:absolute;inset:8%;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,131,58,.26),transparent 66%);filter:blur(10px);animation:pulse 5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.8}50%{opacity:1.1}}
+.table-top{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);
+  width:86%;aspect-ratio:1.45/1;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 36%,#66431f,#3d2611 62%,#2a1a0b);
+  border:1px solid rgba(255,190,120,.2);box-shadow:0 30px 70px rgba(0,0,0,.6),inset 0 10px 34px rgba(255,180,100,.1)}
+.table-top::after{content:"";position:absolute;inset:9%;border-radius:50%;border:1.5px dashed rgba(255,190,120,.18)}
+.dish{position:absolute;border-radius:50%;background:radial-gradient(circle at 40% 35%,#7a4c22,#4a2c12);
+  border:1px solid rgba(255,190,120,.22);box-shadow:0 4px 10px rgba(0,0,0,.4)}
+.dish.d1{width:11%;aspect-ratio:1;left:30%;top:44%}
+.dish.d2{width:9%;aspect-ratio:1;right:26%;top:38%}
+.dish.d3{width:10%;aspect-ratio:1;left:46%;top:66%}
+.dish.d4{width:8%;aspect-ratio:1;left:22%;top:64%}
+.teacup{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:9%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 42% 36%,#e8b57a,#a5642c);border:2px solid rgba(255,220,160,.35);
+  box-shadow:0 6px 16px rgba(0,0,0,.45);display:grid;place-items:center}
+.steam{position:absolute;left:50%;top:-38%;transform:translateX(-50%);font-size:15px;opacity:.75;
+  animation:steam 2.8s ease-in-out infinite}
+@keyframes steam{0%{transform:translate(-50%,0);opacity:.7}50%{opacity:.35}100%{transform:translate(-46%,-14px);opacity:0}}
+.npc{position:absolute;width:33%;border-radius:26%;overflow:hidden;background:var(--card2);
+  border:2px solid rgba(255,190,120,.28);box-shadow:0 16px 40px rgba(0,0,0,.6);transition:transform .25s,z-index 0s;cursor:pointer}
+.npc img{width:100%;height:100%;object-fit:cover;object-position:top}
+.npc:hover{transform:scale(1.07) rotate(0deg)!important;z-index:6}
+.npc.n1{left:7%;top:8%;transform:rotate(-6deg)}
+.npc.n2{right:5%;top:5%;transform:rotate(5deg)}
+.npc.n3{left:2%;bottom:15%;transform:rotate(4deg)}
+.npc.n4{right:3%;bottom:13%;transform:rotate(-4deg)}
+.npc .tag{position:absolute;left:50%;bottom:-13px;transform:translateX(-50%);white-space:nowrap;
+  background:#1e140a;border:1px solid var(--border);border-radius:980px;padding:3px 13px;font-size:12.5px;color:var(--accent2);font-weight:600}
+.bubble{position:absolute;z-index:7;background:#fdf4e6;color:#3a2a18;font-size:13.5px;font-weight:600;
+  padding:9px 16px;border-radius:16px;border-bottom-left-radius:4px;box-shadow:0 10px 24px rgba(0,0,0,.45);
+  animation:floaty 3.8s ease-in-out infinite}
+.bubble.b1{left:-5%;top:40%;animation-delay:.4s}
+.bubble.b2{right:-3%;top:34%;border-bottom-left-radius:16px;border-bottom-right-radius:4px;animation-delay:1.3s}
+.bubble .who{display:block;font-size:10.5px;color:#b06a2c;font-weight:800;letter-spacing:.06em;margin-bottom:1px}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@media(max-width:920px){.bubble{font-size:12px;padding:7px 13px}.bubble.b1{left:0}.bubble.b2{right:0}}
+
+/* ===== marquee ===== */
+.marquee{border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:linear-gradient(90deg,rgba(232,131,58,.05),rgba(232,131,58,.02));
+  overflow:hidden;padding:15px 0;white-space:nowrap}
+.marquee .track{display:inline-block;animation:scroll 36s linear infinite}
+.marquee span{display:inline-block;margin:0 26px;color:var(--secondary);font-size:15px}
+.marquee b{color:var(--accent2);font-weight:600}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== sections ===== */
+section{padding:84px 0}
+.sec-head{text-align:center;margin-bottom:54px}
+.kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.sec-head h2{font-size:clamp(29px,4vw,42px);font-weight:800;letter-spacing:-.02em}
+.sec-head p{color:var(--secondary);margin-top:14px;font-size:16.5px}
+
+/* features */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:920px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.feat-grid{grid-template-columns:1fr}}
+.feat{position:relative;background:linear-gradient(165deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:22px;padding:30px 26px;
+  transition:transform .22s,border-color .22s;overflow:hidden}
+.feat::before{content:"";position:absolute;top:0;left:26px;right:26px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,190,120,.4),transparent);opacity:0;transition:opacity .22s}
+.feat:hover{transform:translateY(-6px);border-color:var(--border-hi)}
+.feat:hover::before{opacity:1}
+.feat .num{position:absolute;top:18px;right:22px;font-size:13px;font-weight:800;color:rgba(255,190,120,.28);letter-spacing:.08em}
+.feat .ico{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;font-size:24px;margin-bottom:18px;
+  background:rgba(232,131,58,.14);border:1px solid rgba(232,131,58,.28)}
+.feat h3{font-size:17.5px;font-weight:800;margin-bottom:9px}
+.feat p{font-size:14.5px;color:var(--secondary)}
+
+/* characters */
+#characters{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.char-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:920px){.char-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.char-grid{grid-template-columns:1fr}}
+.char-card{position:relative;background:linear-gradient(172deg,var(--card),var(--card2));border:1px solid var(--border);
+  border-radius:24px;overflow:hidden;transition:transform .22s,border-color .22s,box-shadow .22s}
+.char-card:hover{transform:translateY(-7px);box-shadow:0 20px 44px rgba(0,0,0,.45)}
+.char-card .pic{aspect-ratio:1/1;overflow:hidden;position:relative}
+.char-card .pic img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .4s}
+.char-card:hover .pic img{transform:scale(1.06)}
+.char-card .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 62%,rgba(20,13,7,.72))}
+.char-card .mood{position:absolute;top:12px;left:12px;z-index:2;background:rgba(18,11,5,.74);backdrop-filter:blur(6px);
+  border:1px solid var(--border);border-radius:980px;padding:3px 13px;font-size:12px;color:var(--accent2);font-weight:600}
+.char-card .accent-bar{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:2}
+.char-card .info{padding:18px 20px 22px}
+.char-card .info h3{font-size:19px;font-weight:800}
+.char-card .info .role{font-size:13px;font-weight:700;margin:3px 0 10px}
+.char-card .info .quote{font-size:14px;color:var(--secondary);min-height:3.4em;line-height:1.65}
+.char-card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.char-card .tags span{font-size:11.5px;color:var(--secondary);border:1px solid var(--border);border-radius:980px;padding:2px 11px}
+
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
+@media(max-width:920px){.steps{grid-template-columns:1fr}}
+.step{position:relative;background:linear-gradient(165deg,var(--card),var(--card2));border:1px solid var(--border);
+  border-radius:24px;padding:34px 28px 30px;transition:transform .22s,border-color .22s}
+.step:hover{transform:translateY(-5px);border-color:var(--border-hi)}
+.step .no{font-size:44px;font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:16px;
+  background:linear-gradient(120deg,#f5a452,#d1551d);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step h3{font-size:19px;font-weight:800;margin-bottom:9px}
+.step p{font-size:14.5px;color:var(--secondary)}
+
+/* cta */
+#download{padding-top:12px}
+.cta-banner{position:relative;border-radius:32px;overflow:hidden;text-align:center;padding:76px 32px 72px;
+  background:radial-gradient(ellipse 85% 130% at 50% 125%,rgba(232,131,58,.4),transparent),linear-gradient(165deg,#2c1d0f,#1a1108);
+  border:1px solid var(--border)}
+.cta-banner::before{content:"";position:absolute;top:0;left:15%;right:15%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,190,120,.5),transparent)}
+.cta-banner h2{font-size:clamp(27px,3.7vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:15px}
+.cta-banner p{color:var(--secondary);max-width:34em;margin:0 auto 32px}
+.faces{display:flex;justify-content:center;margin-bottom:28px}
+.faces img{width:62px;height:62px;border-radius:50%;object-fit:cover;object-position:top;
+  border:2px solid rgba(255,190,120,.35);margin:0 -9px;box-shadow:0 8px 20px rgba(0,0,0,.45);transition:transform .2s}
+.faces img:hover{transform:translateY(-5px) scale(1.08);z-index:3}
+.cta-note{margin-top:18px;font-size:13px;color:var(--muted)}
+
+/* footer */
+footer{border-top:1px solid var(--border);padding:38px 24px;text-align:center;color:var(--secondary);font-size:14px}
+footer .links{margin-bottom:10px}
+footer a{margin:0 14px}
+footer a:hover{color:var(--ink)}
+footer .fine{font-size:12.5px;color:#7a6c5a}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* lang */
+.no{display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><span class="flame">🔥</span>HotSeat</a>
+    <nav>
+      <a class="link" href="#features" data-zh="特色" data-en="Features">特色</a>
+      <a class="link" href="#characters" data-zh="角色" data-en="Characters">角色</a>
+      <a class="link" href="#how" data-zh="玩法" data-en="How it works">玩法</a>
+      <a class="link" href="support.html" data-zh="支持" data-en="Support">支持</a>
+      <div class="lang-switch">
+        <button class="active" data-lang="zh">中文</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="badge"><span class="dot"></span><span data-zh="完全单机 · 无账号 · 无广告" data-en="Fully offline · No account · No ads">完全单机 · 无账号 · 无广告</span></span>
+      <h1 data-zh="这桌话，<em>接得住</em>吗？" data-en="Can you <em>survive</em> this table?">这桌话，<em>接得住</em>吗？</h1>
+      <p class="lead" data-zh="HotSeat 是一场只属于你的饭局对话游戏。四位性格迥异的角色坐在你对面，你说的每一句话都会改变他们对你的态度——而他们，会记仇。" data-en="HotSeat is a dinner-conversation game played solo. Four very different characters sit across from you; every line you say shifts how they see you — and they hold grudges.">
+        HotSeat 是一场只属于你的饭局对话游戏。四位性格迥异的角色坐在你对面，你说的每一句话都会改变他们对你的态度——而他们，会记仇。
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#download" data-zh="🥟 来，坐下吃" data-en="🥟 Take a seat">🥟 来，坐下吃</a>
+        <a class="btn btn-ghost" href="#characters" data-zh="先看看都有谁" data-en="Meet the cast">先看看都有谁</a>
+      </div>
+      <p class="hero-note" data-zh="iOS · 飞行模式也能完整玩一局" data-en="iOS · plays fully in Airplane mode">iOS · 飞行模式也能完整玩一局</p>
+    </div>
+
+    <div class="table-scene">
+      <div class="glow"></div>
+      <div class="table-top"></div>
+      <div class="dish d1"></div><div class="dish d2"></div><div class="dish d3"></div><div class="dish d4"></div>
+      <div class="teacup"><span class="steam">♨️</span></div>
+      <div class="npc n1"><img src="assets/npc-zhou.webp" alt="老周"><span class="tag" data-zh="做东的老周" data-en="Boss Zhou">做东的老周</span></div>
+      <div class="npc n2"><img src="assets/npc-vicky.webp" alt="Vicky"><span class="tag">Vicky</span></div>
+      <div class="npc n3"><img src="assets/npc-chen.webp" alt="陈叔"><span class="tag" data-zh="陈叔" data-en="Uncle Chen">陈叔</span></div>
+      <div class="npc n4"><img src="assets/npc-xiaoli.webp" alt="小李"><span class="tag" data-zh="小李" data-en="Xiao Li">小李</span></div>
+      <div class="bubble b1"><span class="who">老周</span><span data-zh="你上回说的那事……" data-en="About what you said last time…">你上回说的那事……</span></div>
+      <div class="bubble b2"><span class="who">Vicky</span><span data-zh="哟，你是认真的吗？" data-en="Oh, are you serious?">哟，你是认真的吗？</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="mq-track">
+    <span>「<b>来，先干为敬。</b>」</span>
+    <span>「<b>你上回说的那事……</b>」</span>
+    <span>「<b>哟，你是认真的吗？</b>」</span>
+    <span>「<b>这孩子，实诚。</b>」</span>
+    <span>「<b>我随便说两句啊。</b>」</span>
+    <span>「<b>这事不能怪你，但主要责任在你。</b>」</span>
+    <span>「<b>都是自己人，别客气。</b>」</span>
+    <span>「<b>你怎么还不找对象？</b>」</span>
+  </div>
+</div>
+
+<!-- ===== FEATURES ===== -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-zh="为什么好玩" data-en="Why it works">为什么好玩</span>
+      <h2 data-zh="一局饭，四种人，无数种收场" data-en="One dinner, four people, countless endings">一局饭，四种人，无数种收场</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <span class="num">01</span>
+        <div class="ico">✈️</div>
+        <h3 data-zh="完全单机" data-en="Fully offline">完全单机</h3>
+        <p data-zh="所有剧本内置在 App 里，飞行模式照样开席。不需要注册，不需要登录。" data-en="Every scenario ships inside the app. Airplane mode, full round. No sign-up, no sign-in.">所有剧本内置在 App 里，飞行模式照样开席。不需要注册，不需要登录。</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.07s">
+        <span class="num">02</span>
+        <div class="ico">🎲</div>
+        <h3 data-zh="台词现挂" data-en="Improvised lines">台词现挂</h3>
+        <p data-zh="每句话说出前，都会由 Apple 的设备端模型按角色性格、当下情绪和对你的态度重新润色——同一局，两次玩都不一样。" data-en="Right before a character speaks, Apple's on-device model rephrases the line to match who they are, their mood, and how much they like you. No two rounds alike.">每句话说出前，都会由 Apple 的设备端模型按角色性格、当下情绪和对你的态度重新润色——同一局，两次玩都不一样。</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.14s">
+        <span class="num">03</span>
+        <div class="ico">📖</div>
+        <h3 data-zh="他们会记仇" data-en="They hold grudges">他们会记仇</h3>
+        <p data-zh="你留下的糗事会写进角色档案。下一局开局，可能有人当场替你复述一遍，一字不差。" data-en="Your worst moments get filed away. Start a later round and someone may quote you back, word for word.">你留下的糗事会写进角色档案。下一局开局，可能有人当场替你复述一遍，一字不差。</p>
+      </div>
+      <div class="feat reveal" style="transition-delay:.21s">
+        <span class="num">04</span>
+        <div class="ico">🔒</div>
+        <h3 data-zh="只属于你" data-en="Yours alone">只属于你</h3>
+        <p data-zh="无追踪、无广告、无服务器。所有对话记录和进度只存在你的设备上，删掉 App 即全部清除。" data-en="No tracking, no ads, no servers. All transcripts and progress live on your device only; delete the app and it's all gone.">无追踪、无广告、无服务器。所有对话记录和进度只存在你的设备上，删掉 App 即全部清除。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHARACTERS ===== -->
+<section id="characters">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-zh="今晚的座上宾" data-en="Tonight's guests">今晚的座上宾</span>
+      <h2 data-zh="先认识一下这四位" data-en="Meet the four of them">先认识一下这四位</h2>
+      <p data-zh="每一桌的座位会变，但他们的记性，一直很好。" data-en="The seating changes. Their memory doesn't.">每一桌的座位会变，但他们的记性，一直很好。</p>
+    </div>
+    <div class="char-grid">
+      <div class="char-card reveal">
+        <div class="pic"><img src="assets/npc-zhou.webp" alt="老周"><span class="mood" data-zh="心情：热络" data-en="Mood: warm">心情：热络</span></div>
+        <div class="accent-bar" style="background:linear-gradient(90deg,#f0913f,transparent)"></div>
+        <div class="info">
+          <h3 data-zh="老周" data-en="Boss Zhou">老周</h3>
+          <div class="role" style="color:var(--c-zhou)" data-zh="做东的人 · 圆滑周到" data-en="The host · smooth & warm">做东的人 · 圆滑周到</div>
+          <p class="quote" data-zh="「来来来，先干为敬。你上回说的事，我可都记着呢。」" data-en="“Come on, bottoms up first. I still remember what you said last time.”">「来来来，先干为敬。你上回说的事，我可都记着呢。」</p>
+          <div class="tags"><span data-zh="爱牵线" data-en="Matchmaker">爱牵线</span><span data-zh="记性好" data-en="Long memory">记性好</span><span data-zh="场面话十级" data-en="Small talk master">场面话十级</span></div>
+        </div>
+      </div>
+      <div class="char-card reveal" style="transition-delay:.07s">
+        <div class="pic"><img src="assets/npc-vicky.webp" alt="Vicky"><span class="mood" data-zh="心情：审视" data-en="Mood: judging">心情：审视</span></div>
+        <div class="accent-bar" style="background:linear-gradient(90deg,#e2543f,transparent)"></div>
+        <div class="info">
+          <h3>Vicky</h3>
+          <div class="role" style="color:var(--c-vicky)" data-zh="毒舌担当 · 一针见血" data-en="Sharp tongue · zero filter">毒舌担当 · 一针见血</div>
+          <p class="quote" data-zh="「哟，这个回答……你是认真的吗？」" data-en="“Oh, that answer… are you serious right now?”">「哟，这个回答……你是认真的吗？」</p>
+          <div class="tags"><span data-zh="不留情面" data-en="Merciless">不留情面</span><span data-zh="反讽大师" data-en="Sarcasm">反讽大师</span><span data-zh="吃软不吃硬" data-en="Soft spot for sincerity">吃软不吃硬</span></div>
+        </div>
+      </div>
+      <div class="char-card reveal" style="transition-delay:.14s">
+        <div class="pic"><img src="assets/npc-chen.webp" alt="陈叔"><span class="mood" data-zh="心情：深不可测" data-en="Mood: unreadable">心情：深不可测</span></div>
+        <div class="accent-bar" style="background:linear-gradient(90deg,#a98d5f,transparent)"></div>
+        <div class="info">
+          <h3 data-zh="陈叔" data-en="Uncle Chen">陈叔</h3>
+          <div class="role" style="color:var(--c-chen)" data-zh="沉默的老江湖 · 后劲最大" data-en="The quiet veteran · slow burn">沉默的老江湖 · 后劲最大</div>
+          <p class="quote" data-zh="（他看了你一眼，没说话，抿了一口杯里的东西。）" data-en="(He glances at you, says nothing, takes a small sip.)">（他看了你一眼，没说话，抿了一口杯里的东西。）</p>
+          <div class="tags"><span data-zh="言少事大" data-en="Few words, heavy weight">言少事大</span><span data-zh="最记仇" data-en="Worst grudge">最记仇</span><span data-zh="压轴登场" data-en="Saves it for last">压轴登场</span></div>
+        </div>
+      </div>
+      <div class="char-card reveal" style="transition-delay:.21s">
+        <div class="pic"><img src="assets/npc-xiaoli.webp" alt="小李"><span class="mood" data-zh="心情：紧张" data-en="Mood: nervous">心情：紧张</span></div>
+        <div class="accent-bar" style="background:linear-gradient(90deg,#e3b23c,transparent)"></div>
+        <div class="info">
+          <h3 data-zh="小李" data-en="Xiao Li">小李</h3>
+          <div class="role" style="color:var(--c-xiaoli)" data-zh="职场新人 · 想表现又怕说错" data-en="The newcomer · eager & anxious">职场新人 · 想表现又怕说错</div>
+          <p class="quote" data-zh="「哥、姐、老师……我、我该叫您哪个？」" data-en="“Bro? Miss? Sir?… W-what should I call you?”">「哥、姐、老师……我、我该叫您哪个？」</p>
+          <div class="tags"><span data-zh="真诚" data-en="Sincere">真诚</span><span data-zh="容易破防" data-en="Fragile ego">容易破防</span><span data-zh="手机不离手" data-en="Phone glued">手机不离手</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW ===== -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker" data-zh="三步开席" data-en="Three steps">三步开席</span>
+      <h2 data-zh="坐下，接话，看谁先绷不住" data-en="Sit down, answer, see who cracks first">坐下，接话，看谁先绷不住</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="no">01</div>
+        <h3 data-zh="挑一桌" data-en="Pick a table">挑一桌</h3>
+        <p data-zh="每桌是一个独立剧本：相亲饭局、团队聚餐、老家年夜饭……不同的桌，不同的规矩。" data-en="Each table is its own scenario: a blind-date dinner, a team meal, New Year's Eve at home… different tables, different rules.">每桌是一个独立剧本：相亲饭局、团队聚餐、老家年夜饭……不同的桌，不同的规矩。</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.08s">
+        <div class="no">02</div>
+        <h3 data-zh="接话" data-en="Answer live">接话</h3>
+        <p data-zh="角色轮流朝你发问。你可以圆场、可以反击，也可以直接掀桌——后果自负。" data-en="Characters take turns putting you on the spot. Smooth it over, fire back, or flip the table — consequences included.">角色轮流朝你发问。你可以圆场、可以反击，也可以直接掀桌——后果自负。</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.16s">
+        <div class="no">03</div>
+        <h3 data-zh="看结局" data-en="Face the ending">看结局</h3>
+        <p data-zh="你的每句话都会改变他们对你的态度。同一桌饭，收场天差地别——下一局，他们还记得。" data-en="Every line shifts how they see you. The same dinner can end in wildly different ways — and next round, they remember.">你的每句话都会改变他们对你的态度。同一桌饭，收场天差地别——下一局，他们还记得。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="download">
+  <div class="wrap">
+    <div class="cta-banner reveal">
+      <div class="faces">
+        <img src="assets/npc-zhou.webp" alt=""><img src="assets/npc-vicky.webp" alt=""><img src="assets/npc-chen.webp" alt=""><img src="assets/npc-xiaoli.webp" alt="">
+      </div>
+      <h2 data-zh="位置给你留好了" data-en="Your seat is waiting">位置给你留好了</h2>
+      <p data-zh="他们已经落座，话题已经备好。就等你一句接不住的话。" data-en="They're seated and the topics are ready. All that's missing is the answer you'll regret.">他们已经落座，话题已经备好。就等你一句接不住的话。</p>
+      <a class="btn btn-primary" href="https://apps.apple.com" target="_blank" rel="noopener" data-zh="🍎 去 App Store 下载" data-en="🍎 Get it on the App Store">🍎 去 App Store 下载</a>
+      <p class="cta-note" data-zh="上线后此按钮将指向 App Store 页面" data-en="This button will link to the App Store page after launch">上线后此按钮将指向 App Store 页面</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="privacy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+    <a href="support.html" data-zh="支持" data-en="Support">支持</a>
+  </div>
+  <div class="fine">HotSeat — roast &amp; toast</div>
+</footer>
+
+<script>
+/* language switch */
+var btns = document.querySelectorAll('.lang-switch button');
+btns.forEach(function (b) {
+  b.addEventListener('click', function () {
+    var lang = b.dataset.lang;
+    btns.forEach(function (x) { x.classList.remove('active'); });
+    b.classList.add('active');
+    document.querySelectorAll('[data-zh][data-en]').forEach(function (el) {
+      el.innerHTML = el.dataset[lang];
+    });
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+    if (history.replaceState) history.replaceState(null, '', '?lang=' + lang);
+  });
+});
+(function () {
+  var m = location.search.match(/lang=(zh|en)/);
+  if (m && m[1] === 'en') document.querySelector('[data-lang="en"]').click();
+})();
+
+/* marquee: duplicate track content for seamless loop */
+var track = document.getElementById('mq-track');
+track.innerHTML += track.innerHTML;
+
+/* scroll reveal */
+var io = new IntersectionObserver(function (es) {
+  es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+</script>
+</body>
+</html>
