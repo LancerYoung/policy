@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>隐私保护政策 — HotSeat</title>
-<meta name="description" content="HotSeat 隐私保护政策：不收集任何个人数据，对话生成在设备本地完成，无账号、无追踪、无广告。">
+<meta name="description" content="HotSeat 隐私保护政策：不要求注册账号，不收集任何个人身份信息；对话在设备本地处理，仅上报匿名统计与崩溃日志。">
 <style>
 :root{
   --bg:#f6f7fb; --card:#ffffff; --border:rgba(20,30,70,.10);
@@ -30,6 +30,9 @@ p+p{margin-top:10px}
 ul{padding-left:20px;margin:8px 0}
 li{margin-bottom:6px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin:16px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
+th,td{border:1px solid var(--border);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--bg);font-weight:600}
 .updated{font-size:14px;color:var(--secondary);margin-bottom:4px}
 .no{display:none}
 footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--secondary);font-size:14px}
@@ -55,122 +58,126 @@ footer{border-top:1px solid var(--border);padding:24px;text-align:center;color:v
 <!-- ===== ZH ===== -->
 <div class="lang-zh">
   <section>
-    <p class="updated">最近更新：2026 年 9 月 28 日</p>
-    <p>HotSeat 是一款单机的对话游戏。我们把话说在前面：<strong>我们不收集你的任何数据</strong>——不需要注册账号，不需要登录，不需要联网远程存的任何东西。</p>
+    <p class="updated">最近更新：2026 年 10 月 10 日</p>
+    <p>本政策说明「HotSeat」（热座）App（以下简称"本应用"）如何收集、使用与保护你的信息。本应用是一款单机派对聊天游戏，我们坚持<strong>"最小收集"</strong>原则。</p>
   </section>
 
   <section>
-    <h2>一、我们不收集什么</h2>
-    <p>答案很简单：<strong>什么都不收集。</strong></p>
+    <h2>一、我们收集什么</h2>
+    <p>本应用<strong>不要求注册账号</strong>，也不收集任何能直接识别你个人的信息（如姓名、手机号、邮箱、地理位置、通讯录、相册、相机、IDFA/广告标识符）。</p>
+    <p>仅收集以下<strong>匿名</strong>数据，用于维持产品运行与改进体验：</p>
+    <table>
+      <tr><th>数据类型</th><th>说明</th><th>是否关联身份</th></tr>
+      <tr><td>匿名安装 ID</td><td>随机生成、仅存本机，用于统计"有多少人在玩、独立玩家数（DAU/MAU）"</td><td>否</td></tr>
+      <tr><td>玩法聚合数据</td><td>开局/散场次数、领域命中、成就解锁等统计，<strong>不含你输入的具体对话内容</strong></td><td>否</td></tr>
+      <tr><td>崩溃日志</td><td>App 意外崩溃时的崩溃种类、信号、调用栈地址（仅版本/系统/栈地址，无个人信息）</td><td>否</td></tr>
+    </table>
+    <div class="card">
+      <p>你与 AI 角色的对话、你选择的话题选项<strong>均在设备本地处理</strong>，不会上传到我们的服务器，也不会用于训练。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>二、我们怎么用这些数据</h2>
     <ul>
-      <li>没有账号系统，不需要注册、登录或邮箱；</li>
-      <li>不读取你的通讯录、照片、麦克风、相机、定位、日历或健康数据；</li>
-      <li>App 不申请上述任何系统权限；</li>
-      <li>不含任何统计、广告、归因或行为追踪 SDK；</li>
-      <li>不使用 IDFA，也不会跨域追踪你。</li>
+      <li>匿名聚合统计：了解活跃度、玩法分布，用于决定"接下来写哪些剧本"；</li>
+      <li>崩溃诊断：发现线上崩溃、定位问题版本，提升稳定性；</li>
+      <li><strong>绝不</strong>用于跨应用追踪、广告投放或任何画像营销。</li>
     </ul>
   </section>
 
   <section>
-    <h2>二、游戏数据存在哪里</h2>
-    <p>你的每一局游戏、人物图鉴进度、历史对话记录、设置项（比如是否开启背景音乐、选择了哪种界面语言），<strong>全部只保存在你这台设备的本地存储里</strong>。我们没有服务器用来存你的游戏数据，也没有办法读到它。</p>
-    <p>删除 App 即清除全部本地数据。</p>
+    <h2>三、数据存储与第三方</h2>
+    <p>匿名数据经由 Supabase 托管（仅后端基础设施，数据仅含上文所述匿名字段）。所有上报均为后台静默进行，失败即丢弃，不影响你的游戏体验。</p>
   </section>
 
   <section>
-    <h2>三、AI 台词是怎么生成的</h2>
-    <p>角色台词由 Apple 提供的<strong>设备端模型</strong>（Apple Intelligence）在你的手机上即时生成与润色，<strong>不经过我们的服务器</strong>。你的作答和对话内容不会被上传到任何地方用于训练或分析。</p>
-    <p>当设备端模型不可用时，App 会直接播放预先写好的剧本文本，游戏体验不受影响。</p>
+    <h2>四、可选的第三方 AI 服务</h2>
+    <p>本应用默认使用设备端模型生成台词。如果你在设置中自行配置了第三方 AI 服务商（如 OpenAI、DeepSeek 等）及自己的密钥，你与角色的对话内容将按你的配置发送给<strong>该服务商</strong>处理，适用该服务商自己的隐私政策；不配置则全程设备本地生成，对话不出设备。</p>
   </section>
 
   <section>
-    <h2>四、唯一的联网行为</h2>
-    <p>App 启动时可能向公共 CDN 请求一份「剧本目录」配置文件，以及在你需要某份新增剧本时下载对应的加密内容文件，用于更新本地剧本库。</p>
-    <div class="card">
-      <p>这些请求是匿名的：请求中<strong>不包含账号、设备标识、IDFA 或任何身份信息</strong>，服务端也不会据此识别你。下载失败时 App 会静默使用本地已内置的剧本，不影响启动和游戏。</p>
-    </div>
-    <p>除此之外，App 不产生任何其它网络请求。</p>
+    <h2>五、内购与支付</h2>
+    <p>本应用的订阅、剧本包、买断等均通过 Apple App Store 内购完成。<strong>支付由 Apple 处理，我们不收集、不存储任何支付信息（信用卡号、账单等）。</strong>订阅状态仅以"是否订阅/到期时间"等形式保存在你本机。</p>
   </section>
 
   <section>
-    <h2>五、购买</h2>
-    <p>App 内的一次性买断由 Apple 的 StoreKit 完成。整个支付流程由 Apple 处理，<strong>我们看不到也无法保存你的付款信息或身份信息</strong>。你可以在 App Store 的购买记录里管理或恢复已购项目。</p>
+    <h2>六、你的权利：删除数据</h2>
+    <p>你可以在 App 内「设置 → 数据 → 删除我的数据」一键删除本机安装 ID 对应的所有匿名统计与崩溃记录（云端同步删除）。</p>
+    <p>如需进一步协助，可邮件联系：<a href="mailto:lancer.yang@foxmail.com">lancer.yang@foxmail.com</a>，或通过<a href="support.html">支持页面</a>联系我们。</p>
   </section>
 
   <section>
-    <h2>六、儿童</h2>
-    <p>HotSeat 并非面向 13 岁以下儿童的产品，我们也不会有意收集儿童的个人信息。</p>
+    <h2>七、儿童隐私</h2>
+    <p>本应用不面向 13 岁以下儿童设计，也不会有意收集儿童信息。</p>
   </section>
 
   <section>
-    <h2>七、政策变更</h2>
-    <p>如果将来我们的数据处理方式有变化，会先更新本页内容，并确保你随时可以在这里看到当前生效的版本。</p>
-  </section>
-
-  <section>
-    <h2>八、联系我们</h2>
-    <p>关于隐私的任何问题，请通过<a href="support.html">支持页面</a>上的方式联系我们。</p>
+    <h2>八、政策变更</h2>
+    <p>如本政策有重大变更，会在应用内或本页面更新并说明生效日期。</p>
   </section>
 </div>
 
 <!-- ===== EN ===== -->
 <div class="lang-en no">
   <section>
-    <p class="updated">Last updated: September 28, 2026</p>
-    <p>HotSeat is an offline conversation game. Let&rsquo;s put the short version first: <strong>we collect nothing about you.</strong> No account, no sign-in, no profile anywhere else.</p>
+    <p class="updated">Last updated: October 10, 2026</p>
+    <p>This policy explains how the HotSeat app (the "App") collects, uses and protects your information. HotSeat is an offline party conversation game, and we follow a strict <strong>data-minimisation</strong> approach.</p>
   </section>
 
   <section>
     <h2>1. What we collect</h2>
-    <p>The honest answer: <strong>nothing.</strong></p>
+    <p>The App <strong>requires no account</strong> and collects no directly identifying information (name, phone number, email, location, contacts, photos, camera, IDFA / advertising identifiers).</p>
+    <p>We collect only the following <strong>anonymous</strong> data, to keep the product running and improve it:</p>
+    <table>
+      <tr><th>Data</th><th>Purpose</th><th>Linked to identity?</th></tr>
+      <tr><td>Anonymous install ID</td><td>Randomly generated, stored only on your device; counts how many people play (DAU/MAU)</td><td>No</td></tr>
+      <tr><td>Aggregated gameplay stats</td><td>Session counts, topic-category hits, achievements — <strong>never the actual content of your conversations</strong></td><td>No</td></tr>
+      <tr><td>Crash logs</td><td>Crash type, signal and stack addresses when the App crashes (version/system/stack only, no personal data)</td><td>No</td></tr>
+    </table>
+    <div class="card">
+      <p>Your conversations with the AI characters and the options you pick are <strong>processed on your device</strong>. They are never uploaded to our servers and never used for training.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. How we use this data</h2>
     <ul>
-      <li>No accounts, no registration, no email required;</li>
-      <li>No access to your contacts, photos, microphone, camera, location, calendar or health data;</li>
-      <li>The app requests none of those system permissions;</li>
-      <li>No analytics, advertising, attribution or behavioural tracking SDKs;</li>
-      <li>No IDFA and no cross-app tracking.</li>
+      <li>Anonymous aggregate statistics: understand activity and play patterns to decide which scenarios to write next;</li>
+      <li>Crash diagnostics: catch crashes in the wild and fix the affected versions;</li>
+      <li><strong>Never</strong> for cross-app tracking, advertising, or profiling of any kind.</li>
     </ul>
   </section>
 
   <section>
-    <h2>2. Where your game data lives</h2>
-    <p>Every round you play, your Character Codex progress, full conversation history and settings (background music, interface language) are <strong>stored only in local storage on your own device</strong>. We run no server that holds your game data, and we have no way to read it.</p>
-    <p>Deleting the app removes all local data.</p>
+    <h2>3. Storage &amp; third parties</h2>
+    <p>Anonymous data is hosted via Supabase (backend infrastructure only; the data contains only the anonymous fields described above). All uploads happen silently in the background and are simply discarded on failure — your game is never affected.</p>
   </section>
 
   <section>
-    <h2>3. How dialogue is generated</h2>
-    <p>Character lines are generated and rephrased on the spot by Apple&rsquo;s <strong>on-device model</strong> (Apple Intelligence), running on your phone. They never pass through our servers. Your answers and the conversation are not uploaded anywhere for training or analysis.</p>
-    <p>When the on-device model is unavailable, the app plays the pre-written script text instead. Nothing breaks.</p>
+    <h2>4. Optional third-party AI providers</h2>
+    <p>By default, dialogue is generated by the on-device model. If you configure your own third-party AI provider (e.g. OpenAI, DeepSeek) and API key in Settings, your conversations with the characters are sent to <strong>that provider</strong> as you configured, under that provider's own privacy policy. Without such a configuration, everything stays on your device.</p>
   </section>
 
   <section>
-    <h2>4. The one network request we make</h2>
-    <p>On launch, the app may request a small content catalogue from a public CDN, and download an encrypted file when you open a newly released scenario — that is how we ship new material to your local library.</p>
-    <div class="card">
-      <p>These requests are anonymous: they contain <strong>no account identifier, device identifier, IDFA or any personal information</strong>, and nothing in them can be used to single you out. If a download fails, the app quietly falls back to the scenarios already built in.</p>
-    </div>
-    <p>Outside of that, the app makes no other network requests.</p>
+    <h2>5. Purchases &amp; payments</h2>
+    <p>Subscriptions, scenario packs and the one-time unlock are handled by Apple's In-App Purchase. <strong>Payment is processed by Apple; we never collect or store any payment information (card numbers, billing details, etc.).</strong> Subscription status is stored on your device only (subscribed or not, expiry time).</p>
   </section>
 
   <section>
-    <h2>5. Purchases</h2>
-    <p>The optional one-time unlock is processed by Apple&rsquo;s StoreKit. Payment is handled entirely by Apple — <strong>we never see or store your payment or identity details</strong>. Manage or restore your purchase from your App Store account.</p>
+    <h2>6. Your rights: deleting data</h2>
+    <p>In the App, go to Settings → Data → Delete My Data to remove all anonymous statistics and crash records tied to this device's install ID (deleted from the cloud as well).</p>
+    <p>For anything else, email <a href="mailto:lancer.yang@foxmail.com">lancer.yang@foxmail.com</a> or reach us via the <a href="support.html">support page</a>.</p>
   </section>
 
   <section>
-    <h2>6. Children</h2>
-    <p>HotSeat is not directed at children under 13, and we do not knowingly collect personal information from children.</p>
+    <h2>7. Children</h2>
+    <p>HotSeat is not directed at children under 13, and we do not knowingly collect information from children.</p>
   </section>
 
   <section>
-    <h2>7. Changes to this policy</h2>
-    <p>If our practices ever change, this page changes first. The version published here is always the one in effect.</p>
-  </section>
-
-  <section>
-    <h2>8. Contact</h2>
-    <p>Any question about privacy: reach us through the <a href="support.html">support page</a>.</p>
+    <h2>8. Changes to this policy</h2>
+    <p>Material changes will be announced in the App or on this page, with the effective date noted.</p>
   </section>
 </div>
 
