@@ -9,6 +9,7 @@
       "endAt": "2026-10-25T00:00:00+08:00",
       "minAppVersion": "3.2.0",
       "placements": ["top", "button"],
+      "regions": ["CHN"],
       "style": {
         "variant": "gradient",
         "bgFrom": "#FF6A3D",
@@ -17,9 +18,9 @@
         "accent": "#C1121F"
       },
       "content": {
-        "badge": "涨价倒计时",
-        "title": "10 月 25 日起会员价上调至 ¥58",
-        "subtitle": "现价 ¥38，想入手的趁现在 · 订阅或买断均可用",
+        "badge": "买断涨价倒计时",
+        "title": "10 月 25 日起买断价上调至 ¥58",
+        "subtitle": "现价 ¥38 一次买断，涨价前入手 · 订阅价格不变",
         "imageUrl": null,
         "cta": null
       }
