@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "promos": [
+    {
+      "id": "placeholder_2026_10",
+      "enabled": false,
+      "priority": 100,
+      "startAt": "2026-10-18T00:00:00+08:00",
+      "endAt": "2026-11-18T00:00:00+08:00",
+      "minAppVersion": "3.5.0",
+      "placements": ["top"],
+      "regions": ["CHN"],
+      "style": {
+        "variant": "gradient",
+        "bgFrom": "#2B5BFF",
+        "bgTo": "#1A3FCC",
+        "textColor": "#FFFFFF",
+        "accent": "#FFD66B"
+      },
+      "content": {
+        "badge": "限时",
+        "title": "标题写这里（≤14 字最有冲击力）",
+        "subtitle": "副标题一行，讲清楚「现在买能得到什么」",
+        "imageUrl": null,
+        "cta": null
+      }
+    }
+  ]
+}
