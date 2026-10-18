@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "promos": [
+    {
+      "id": "stroke_2026_10_english",
+      "enabled": true,
+      "priority": 100,
+      "startAt": "2026-10-18T00:00:00+08:00",
+      "endAt": "2026-12-31T23:59:59+08:00",
+      "minAppVersion": "3.2.0",
+      "placements": ["top", "button"],
+      "style": {
+        "variant": "gradient",
+        "bgFrom": "#2B5BFF",
+        "bgTo": "#6A3CE0",
+        "textColor": "#FFFFFF",
+        "accent": "#FFD66B"
+      },
+      "content": {
+        "badge": "新版 3.2",
+        "title": "英文单词补全 + 中文释义已上线",
+        "subtitle": "字母键盘打前缀即出整词，候选下方带中文释义 · 订阅或买断均可用",
+        "imageUrl": null,
+        "cta": null
+      }
+    }
+  ]
+}
