@@ -1,0 +1,28 @@
+{
+  "_note": "大鹅五笔 购买页 / 首页远程运营配置。当前是【测试活动】：只为确认展示链路已通。⚠️ 正式上线前把 enabled 改回 false，或换成真实活动文案（绝不要写价格/折扣数字，价格由 StoreKit 实时给出，写死会和后台调价打架）。同一页不要同时命中 top 和 button 两条，否则看起来像重复 bug（本 App 页面只放 top 位，button 位保留给将来复用）。placements 可选 top / button；起止时间用 ISO8601 带时区；regions 留空 = 全地区可见。",
+  "version": 1,
+  "promos": [
+    {
+      "id": "test_top_2026_10_18",
+      "enabled": true,
+      "priority": 100,
+      "startAt": "2026-10-18T00:00:00+08:00",
+      "endAt": "2026-12-31T23:59:59+08:00",
+      "placements": ["top"],
+      "style": {
+        "variant": "gradient",
+        "bgFrom": "#15B5C9",
+        "bgTo": "#0E8C9C",
+        "textColor": "#FFFFFF",
+        "accent": "#FFE58A"
+      },
+      "content": {
+        "badge": "测试",
+        "title": "限时福利 · 测试横幅",
+        "subtitle": "看到这张卡就说明远程配置已生效，正式活动只改这个文件即可。",
+        "imageUrl": null,
+        "cta": null
+      }
+    }
+  ]
+}
