@@ -1,11 +1,33 @@
 {
-  "_note": "飞鱼/咕咕拼音 购买页远程运营配置。当前是【测试活动】：top 一条启用中（用来确认展示链路），button 位已停用（2026-10-18 用户要求去掉购买按钮上方的小条，本 App 页面不再渲染 button 位；配置保留只为将来别家复用）。正式上线前把 enabled 改回 false 或换成真实文案（绝不要写价格/折扣数字，价格由 StoreKit 实时给出）。同一个活动不要同时写 top 和 button，否则同页会出现两条重复促销。",
+  "_note": "飞鱼/咕咕拼音 购买页远程运营配置。当前活动：年度会员限时特惠（top 位，2026-10-21 00:00 ~ 2026-10-31 23:59 东八区）。button 位保持停用（2026-10-18 用户要求去掉购买按钮上方小条，本 App 不再渲染 button 位）。⚠️ 价格严禁写死在文案里——¥28 / ¥38 由 App Store Connect 设置、StoreKit 实时给出，本文件只控展示；活动到期后横幅自动消失，无需改回。测试横幅 test_top 已停用。",
   "version": 1,
   "promos": [
     {
-      "id": "test_top_2026_10_18",
+      "id": "annual_limited_2026_10_21",
       "enabled": true,
       "priority": 100,
+      "startAt": "2026-10-21T00:00:00+08:00",
+      "endAt": "2026-10-31T23:59:59+08:00",
+      "placements": ["top"],
+      "style": {
+        "variant": "gradient",
+        "bgFrom": "#2B5BFF",
+        "bgTo": "#1A3FCC",
+        "textColor": "#FFFFFF",
+        "accent": "#FFD66B"
+      },
+      "content": {
+        "badge": "限时",
+        "title": "年度会员限时特惠",
+        "subtitle": "10.21–10.31 开通年会员，限时专属优惠",
+        "imageUrl": null,
+        "cta": null
+      }
+    },
+    {
+      "id": "test_top_2026_10_18",
+      "enabled": false,
+      "priority": 90,
       "startAt": "2026-10-18T00:00:00+08:00",
       "endAt": "2026-12-31T23:59:59+08:00",
       "placements": ["top"],
@@ -27,7 +49,7 @@
     {
       "id": "test_button_2026_10_18",
       "enabled": false,
-      "priority": 90,
+      "priority": 80,
       "startAt": "2026-10-18T00:00:00+08:00",
       "endAt": "2026-12-31T23:59:59+08:00",
       "placements": ["button"],
